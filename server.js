@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -11,7 +13,19 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+// connect to database for deployment
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mern", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+// check to see if connected to test db
+const conn = mongoose.connection;
+conn.on("error", console.error.bind(console, "connection error:"));
+conn.once("open", function () {
+  console.log("connected to db");
+});
 // Define API routes here
+
 
 // Send every other request to the React app
 // Define any API routes before this runs
