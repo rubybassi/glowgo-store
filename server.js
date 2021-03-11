@@ -24,11 +24,14 @@ conn.on("error", console.error.bind(console, "connection error:"));
 conn.once("open", function () {
   console.log("connected to db");
 });
-// Define API routes here
 
+// Define API routes here
+app.use('/search', require('./backend/routes/search.js'));
+app.use('/product', require('./backend/routes/product.js'));
+app.use('/order', require('./backend/routes/order.js'));
+app.use('/user', require('./backend/routes/user.js'));
 
 // Send every other request to the React app
-// Define any API routes before this runs
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
