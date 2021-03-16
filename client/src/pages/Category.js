@@ -1,13 +1,14 @@
-import React from 'react'
-import Categories from '../components/Category/Categories'
+import React from "react";
+import Categories from "../components/Category/Categories";
+import FeaturedHeader from "../components/HeaderText/FeaturedHeader";
 
 const Category = () => {
   return (
     <div>
-      <h1>category page</h1>
+      <FeaturedHeader />
       <Categories />
     </div>
-  )
-}
+  );
+};
 
-export default Category
+export default Category;

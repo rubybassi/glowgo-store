@@ -7,7 +7,6 @@ export default makeStyles((theme) => ({
   media: {
     height: 0,
     paddingTop: '90%', //decide on aspect ratio
-
   },
   cardActions: {
     display: 'flex',

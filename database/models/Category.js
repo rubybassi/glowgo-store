@@ -14,6 +14,9 @@ const CategorySchema = new Schema({
     ref: "Product",
     default: null,
   }],
+  image: {
+    type: String,
+  }
 });
 
 const Category = mongoose.model("Category", CategorySchema);
