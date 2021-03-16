@@ -26,7 +26,6 @@ conn.once("open", function () {
 });
 
 // Define API routes here
-app.use('/search', require('./backend/routes/search.js'));
 app.use('/product', require('./backend/routes/product.js'));
 app.use('/order', require('./backend/routes/order.js'));
 app.use('/user', require('./backend/routes/user.js'));

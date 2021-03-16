@@ -1,12 +1,13 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export default makeStyles(() => ({
+export default makeStyles((theme) => ({
   root: {
     maxWidth: '100%'
   },
   media: {
     height: 0,
-    paddingTop: '80%' //decide on aspect ratio
+    paddingTop: '90%', //decide on aspect ratio
+
   },
   cardActions: {
     display: 'flex',
@@ -17,7 +18,8 @@ export default makeStyles(() => ({
     justifyContent: 'space-between'
   },
   link: {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    color: theme.palette.primary.dark,
   },
   description: {
     noWrap: true

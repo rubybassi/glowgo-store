@@ -2,3 +2,5 @@ node_modules
 .DS_Store
 *.env
 README.md
+client/src/Practice.js
+client/src/testData.js

@@ -5,10 +5,13 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import { ThemeProvider } from "@material-ui/core";
 import theme from "./themeProvider.js";
+import { SiteContextProvider } from "./SiteContext";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <App />
+    <SiteContextProvider>
+      <App />
+    </SiteContextProvider>
   </ThemeProvider>,
   document.getElementById("root")
 );

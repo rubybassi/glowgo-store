@@ -8,40 +8,29 @@ const ProductSchema = new Schema({
   name: {
     type: String,
   },
-  shortDescription: {
-    type: String,
-  },
   description: {
-    type: String,
-  },
-  imageThumbnailUrl: {
     type: String,
   },
   imageProductUrl: [
     {
-      type: String, // array as can have multiple images
+      type: String,
     },
   ],
-  relatedProducts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Product", // will map the product collection to find matching product IDs
-    },
-  ],
-  quantity: {
-    type: Number,
+  pkSize: {
+    type: String,
   },
   price: {
     type: Number,
+    default: 0,
   },
   inventoryStatus: {
     type: String,
   },
   bestSeller: {
-    type: Number, // use binary 1 = yes 0 = no
+    type: Boolean,
   },
   newArrivals: {
-    type: Number, // use binary 1 = yes 0 = no
+    type: Boolean,
   },
   brand: {
     type: Schema.Types.ObjectId,

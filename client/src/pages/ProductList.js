@@ -7,9 +7,10 @@ import Grid from "@material-ui/core/Grid";
 
 const ProductList = () => {
   return (
-      <Container fixed>
-        <Products />
-      </Container>
+    <div>
+      <h1>product list page</h1>
+      <Products />
+    </div>
   );
 };
 
