@@ -6,6 +6,7 @@ import {
   CardContent,
   Typography,
   IconButton,
+  Button,
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
 import useStyles from "./styles";
@@ -14,7 +15,7 @@ import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 const Product = ({ item }) => {
-  const { addtoCart } = useContext(SiteContext);
+  const { addtoCart, getBrandById, getProductById } = useContext(SiteContext);
   const classes = useStyles();
 
   return (
@@ -23,6 +24,7 @@ const Product = ({ item }) => {
         className={classes.media}
         image={item.imageProductUrl[0]}
         title={item.name}
+        onClick={() => getProductById(item.brand._id)} color="primary"
       />
       <CardContent>
         <div className={classes.cardContent}>
@@ -36,20 +38,22 @@ const Product = ({ item }) => {
         <Typography variant="body2" color="textSecondary">
           {item.pkSize}
         </Typography>
-        <Typography variant="overline" display="block">
-          <Link
-            to={`/product/brand/${item.brand._id}`}
-            className={classes.link}
-          >
-            {item.brand.name}
-          </Link>
-        </Typography>
+        <Button onClick={() => getBrandById(item.brand._id)} color="primary">
+          <Typography variant="overline" display="block">
+            <Link
+              to={`/product/brand/${item.brand._id}`}
+              className={classes.link}
+            >
+              {item.brand.name}
+            </Link>
+          </Typography>
+        </Button>
         <Typography variant="body2" color="textSecondary" noWrap>
           {item.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.CardActions}>
-        <IconButton aria-label="Add to cart" onClick={()=> addtoCart(item, 1)}>
+        <IconButton aria-label="Add to cart" onClick={() => addtoCart(item, 1)}>
           <AddShoppingCart addeditem={item} />
         </IconButton>
       </CardActions>

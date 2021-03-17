@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import ProductCard from "../Product/ProductCard";
+import ProductCard from "../ProductList/ProductCard";
 import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 import FeaturedHeader from "../HeaderText/FeaturedHeader";

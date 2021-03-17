@@ -1,5 +1,5 @@
 import React from "react";
-import Products from "../components/Product/Products";
+import Products from "../components/ProductList/Products";
 import Container from "@material-ui/core/Container";
 
 const ProductList = () => {

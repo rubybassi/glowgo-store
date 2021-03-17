@@ -3,19 +3,14 @@ import { List, Divider, ListItem, ListItemText } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./styles";
-//import { categories, brands } from "../../testData";
 import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 const SideDrawer = ({ toggleDrawer }) => {
   const classes = useStyles();
-  const { categories, brands, getCategoryById, getBrandById} = useContext(SiteContext);
-
-  //button handler for category
-  // api call using id and set sate
-
-  //button handler for brands
-
+  const { categories, brands, getCategoryById, getBrandById } = useContext(
+    SiteContext
+  );
 
   return (
     <div>
@@ -32,7 +27,7 @@ const SideDrawer = ({ toggleDrawer }) => {
         </Link>
 
         <Divider />
-        
+
         <ListItem button>
           <ListItemText primary="Categories" />
         </ListItem>
@@ -66,3 +61,4 @@ const SideDrawer = ({ toggleDrawer }) => {
 export default SideDrawer;
 
 // onClick={(e) => getCategoryById(e, category._id)}
+//<ListItem button onClick={() => getBrandById(brand._id)}>

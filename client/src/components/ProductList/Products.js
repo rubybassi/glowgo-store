@@ -5,7 +5,6 @@ import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 const Products = () => {
-
   const { products } = useContext(SiteContext);
 
   return (
@@ -13,7 +12,7 @@ const Products = () => {
       <Grid container spacing={4}>
         {products.map((item) => (
           <Grid item key={item._id} xs={12} sm={6} md={4}>
-            <ProductCard item={item}/>
+            <ProductCard item={item} />
           </Grid>
         ))}
       </Grid>
