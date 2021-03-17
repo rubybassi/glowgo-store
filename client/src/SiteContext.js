@@ -2,19 +2,24 @@ import { useState, createContext, useEffect } from "react";
 const SiteContext = createContext();
 
 const SiteContextProvider = ({ children }) => {
-  // global states
   const [products, setProducts] = useState([]);
-  const [cartIconCount, setCartIconCount] = useState(0); // get from local storage
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const [userSearch, setUserSearch] = useState("");
 
-  // functions
+  const getCart = () => JSON.parse(localStorage.getItem("cart"));
+  const [cartItems, setcartItems] = useState(getCart()?.cartItems || []);
+  const [cartQty, setcartQty] = useState(getCart()?.cartQty || 0);
 
-  // need to save local storage
-  const handleCartCounter = () => {
-    setCartIconCount((prev) => prev + 1);
+  // function to handle cartItems added to cart and save to local storage
+  const addtoCart = (item, qty) => {
+    setcartItems((prev) => [...prev, item]);
+    setcartQty((prev) => prev + qty);
   };
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify({ cartItems, cartQty }));
+  }, [cartItems, cartQty]);
 
   const handleUserSearchInput = (e) => {
     console.log("user value", e.target.value);
@@ -22,7 +27,8 @@ const SiteContextProvider = ({ children }) => {
     setUserSearch(searched);
   };
 
-  // fetch all products
+  // ======== refactor all fetches - create a single custom hook with response, error and status state
+  // fetch all products add try catch
   useEffect(() => {
     const queryURL = "/product/all";
     const fetchAllProducts = async () => {
@@ -69,10 +75,11 @@ const SiteContextProvider = ({ children }) => {
         products,
         categories,
         brands,
-        handleCartCounter,
-        cartIconCount,
+        addtoCart,
         handleUserSearchInput,
         userSearch,
+        cartItems,
+        cartQty,
       }}
     >
       {children}

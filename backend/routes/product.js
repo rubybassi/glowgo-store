@@ -73,7 +73,7 @@ router.get("/brand/:id", async (req, res) => {
     res
       .status(404)
       .json({
-        error: "Y.",
+        error: "Your request could not be processed. Please try again.",
       });
   }
 });

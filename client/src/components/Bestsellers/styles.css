@@ -1,0 +1,14 @@
+.slider {
+  height: 200px;
+}
+
+.slick-slide img {
+  width: 70%;
+  margin: auto;
+  padding: 0;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}

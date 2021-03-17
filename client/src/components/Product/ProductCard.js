@@ -14,8 +14,9 @@ import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 const Product = ({ item }) => {
-  const { handleCartCounter } = useContext(SiteContext);
+  const { addtoCart } = useContext(SiteContext);
   const classes = useStyles();
+
   return (
     <Card className={classes.root}>
       <CardMedia
@@ -25,7 +26,7 @@ const Product = ({ item }) => {
       />
       <CardContent>
         <div className={classes.cardContent}>
-          <Link to={`/product/${item.id}`} className={classes.link}>
+          <Link to={`/product/${item._id}`} className={classes.link}>
             <Typography variant="body1" gutterBottom color="textPrimary">
               {item.name}
             </Typography>
@@ -48,7 +49,7 @@ const Product = ({ item }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.CardActions}>
-        <IconButton aria-label="Add to cart" onClick={handleCartCounter}>
+        <IconButton aria-label="Add to cart" onClick={()=> addtoCart(item, 1)}>
           <AddShoppingCart addeditem={item} />
         </IconButton>
       </CardActions>

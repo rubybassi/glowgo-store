@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/glowgo.png";
-import {AppBar,Toolbar,IconButton,InputBase,Badge,MenuItem,Menu,Drawer} from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  InputBase,
+  Badge,
+  MenuItem,
+  Menu,
+  Drawer,
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -13,8 +22,7 @@ import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 export default function NavBar() {
-
-  const { cartIconCount, handleCartCounter, userSearch, handleUserSearchInput } = useContext(SiteContext);
+  const { userSearch, handleUserSearchInput, cartQty } = useContext(SiteContext);
 
   // @material ui styling props and functions
   const classes = useStyles();
@@ -79,15 +87,13 @@ export default function NavBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton
-          aria-label="show cart items"
-          color="inherit"
-          onClick={handleCartCounter}
-        >
-          <Badge badgeContent={cartIconCount} color="secondary">
-            <ShoppingCart />
-          </Badge>
-        </IconButton>
+        <Link to={"/cart"} className={classes.link}>
+          <IconButton aria-label="show cart items" color="inherit">
+            <Badge badgeContent={cartQty} color="error">
+              <ShoppingCart />
+            </Badge>
+          </IconButton>
+        </Link>
       </MenuItem>
 
       <MenuItem onClick={handleProfileMenuOpen}>
@@ -124,7 +130,6 @@ export default function NavBar() {
       <AppBar position="sticky" className={classes.appBar}>
         <Toolbar>
           <div></div>
-
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -134,7 +139,6 @@ export default function NavBar() {
           >
             <MenuIcon />
           </IconButton>
-
           <Drawer
             anchor="left"
             open={drawerOpened}
@@ -142,7 +146,6 @@ export default function NavBar() {
           >
             <SideDrawer toggleDrawer={toggleDrawer} />
           </Drawer>
-
           <Link to={"/"} className={classes.link}>
             <img
               src={logo}
@@ -151,7 +154,6 @@ export default function NavBar() {
               className={classes.image}
             />
           </Link>
-
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -167,16 +169,11 @@ export default function NavBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-
           <div className={classes.grow} />
-
           <div className={classes.sectionDesktop}>
             <Link to={"/cart"} className={classes.link}>
-              <IconButton
-                aria-label="cart items"
-                color="inherit"
-              >
-                <Badge badgeContent={cartIconCount} color="secondary">
+              <IconButton aria-label="cart items" color="inherit">
+                <Badge badgeContent={cartQty} color="error">
                   <ShoppingCart />
                 </Badge>
               </IconButton>
@@ -192,7 +189,6 @@ export default function NavBar() {
               <AccountCircle />
             </IconButton>
           </div>
-
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
