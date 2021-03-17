@@ -9,7 +9,7 @@ import FeaturedHeader from "../HeaderText/FeaturedHeader";
 const Categories = () => {
   const { products, brands } = useContext(SiteContext);
   let { id } = useParams();
-  console.log(id);
+  console.log("brand params id",id);
 
   return (
     <div>
