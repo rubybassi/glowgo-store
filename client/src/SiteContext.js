@@ -14,16 +14,18 @@ const SiteContextProvider = ({ children }) => {
   const [cartItems, setcartItems] = useState(getCart()?.cartItems || []);
   const [cartQty, setcartQty] = useState(getCart()?.cartQty || 0);
   const [isLoading, setisLoading] = useState(true);
+  const [seeAllProducts, setSeeAllProducts] = useState(false);
 
   //============================INITIAL LOAD ACTIONS=======================
-  // fetches all products
+  // fetches all products and rerenders when shop all products is selected
   useEffect(() => {
     const fetchAllProducts = async () => {
       const payload = await API.fetch("/product/all");
       setProducts(payload);
     };
     fetchAllProducts();
-  }, []);
+    setSeeAllProducts(false);
+  }, [seeAllProducts]);
 
   // fetches all categories
   useEffect(() => {
@@ -71,7 +73,8 @@ const SiteContextProvider = ({ children }) => {
     setisLoading(false);
   };
 
-  // get products by brand selection
+  //============================USER PRODUCT SELECTION ACTIONS=======================
+  // get products by id on brand selection
   const getBrandById = async (id) => {
     setisLoading(true);
     const payload = await API.fetch(`/product/brand/${id}`);
@@ -79,14 +82,18 @@ const SiteContextProvider = ({ children }) => {
     setisLoading(false);
   };
 
-    // get products by id on product list selection
-    const getProductById = async (id) => {
-      setisLoading(true);
-      const payload = await API.fetch(`/product/brand/${id}`);
-      setproductById(payload);
-      console.log("productsById", productById);
-      setisLoading(false);
-    };
+  // get products by id on product list selection
+  const getProductById = async (id) => {
+    setisLoading(true);
+    const payload = await API.fetch(`/product/brand/${id}`);
+    setproductById(payload);
+    setisLoading(false);
+  };
+
+  // set state when user requests all products selection and trigger fetchallproducts use effect
+  const getAllProducts = () => {
+    setSeeAllProducts(true);
+  };
 
   return (
     <SiteContext.Provider
@@ -105,7 +112,8 @@ const SiteContextProvider = ({ children }) => {
         getProductById,
         productsByCategory,
         productsByBrand,
-        productById
+        productById,
+        getAllProducts,
       }}
     >
       {children}
@@ -117,18 +125,6 @@ export default SiteContext;
 export { SiteContextProvider };
 
 // old code for possible reuse or reference
-
-// useEffect(() => {
-//   const queryURL = "/product/brand";
-//   const fetchAllProducts = async () => {
-//     const response = await fetch(queryURL);
-//     const payload = await response.json();
-//     console.log("brands", payload);
-//     setBrands(payload || []);
-//   };
-//   fetchAllProducts();
-// }, []);
-
 /*const toggleMessage = async (num) => {
     setMessage( message => !message); // toggles state
     console.log('button clicked');

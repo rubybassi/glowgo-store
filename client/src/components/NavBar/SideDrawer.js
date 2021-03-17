@@ -8,9 +8,13 @@ import SiteContext from "../../SiteContext";
 
 const SideDrawer = ({ toggleDrawer }) => {
   const classes = useStyles();
-  const { categories, brands, getCategoryById, getBrandById } = useContext(
-    SiteContext
-  );
+  const {
+    categories,
+    brands,
+    getCategoryById,
+    getBrandById,
+    getAllProducts,
+  } = useContext(SiteContext);
 
   return (
     <div>
@@ -21,7 +25,7 @@ const SideDrawer = ({ toggleDrawer }) => {
       />
       <List className={classes.listLink}>
         <Link to={"/product/all"}>
-          <ListItem button>
+          <ListItem button button onClick={getAllProducts}>
             <ListItemText primary="All Products" className={classes.link} />
           </ListItem>
         </Link>
@@ -59,6 +63,3 @@ const SideDrawer = ({ toggleDrawer }) => {
 };
 
 export default SideDrawer;
-
-// onClick={(e) => getCategoryById(e, category._id)}
-//<ListItem button onClick={() => getBrandById(brand._id)}>
