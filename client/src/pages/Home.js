@@ -1,12 +1,13 @@
 import React from "react";
 import Bestsellers from "../components/Bestsellers/Bestsellers";
+import HomeCarousel from "../components/HomeCarousel/HomeCarousel";
 import Container from "@material-ui/core/Container";
 
 const Home = () => {
   return (
     <div>
-      <h1>home page</h1>
       <Container>
+        <HomeCarousel/>
         <Bestsellers />
       </Container>
     </div>

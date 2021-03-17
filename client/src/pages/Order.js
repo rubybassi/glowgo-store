@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
+import Container from "@material-ui/core/Container";
 
 const Order = () => {
   return (
     <div>
-      <h1>order page</h1>
+      <Container>
+        <h1>order page</h1>
+      </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Order
+export default Order;

@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
+import Container from "@material-ui/core/Container";
 
 const Login = () => {
   return (
     <div>
-      <h1>login page</h1>
+      <Container>
+        <h1>login page</h1>
+      </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

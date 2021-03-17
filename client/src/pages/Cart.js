@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
+import Container from "@material-ui/core/Container";
 
 const Cart = () => {
   return (
     <div>
-      <h1>Cart</h1>
+      <Container>
+        <h1>Cart</h1>
+      </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
