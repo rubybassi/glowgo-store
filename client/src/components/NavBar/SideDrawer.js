@@ -9,7 +9,14 @@ import SiteContext from "../../SiteContext";
 
 const SideDrawer = ({ toggleDrawer }) => {
   const classes = useStyles();
-  const { categories, brands } = useContext(SiteContext);
+  const { categories, brands, getCategoryById, getBrandById} = useContext(SiteContext);
+
+  //button handler for category
+  // api call using id and set sate
+
+  //button handler for brands
+
+
   return (
     <div>
       <CloseIcon
@@ -23,13 +30,15 @@ const SideDrawer = ({ toggleDrawer }) => {
             <ListItemText primary="All Products" className={classes.link} />
           </ListItem>
         </Link>
+
         <Divider />
+        
         <ListItem button>
           <ListItemText primary="Categories" />
         </ListItem>
         {categories.map((category) => (
           <Link to={`/product/category/${category._id}`} key={category._id}>
-            <ListItem button>
+            <ListItem button onClick={() => getCategoryById(category._id)}>
               <ListItemText primary={category.name} className={classes.link} />
             </ListItem>
           </Link>
@@ -44,7 +53,7 @@ const SideDrawer = ({ toggleDrawer }) => {
         </ListItem>
         {brands.map((brand) => (
           <Link to={`/product/brand/${brand._id}`} key={brand._id}>
-            <ListItem button>
+            <ListItem button onClick={() => getBrandById(brand._id)}>
               <ListItemText primary={brand.name} className={classes.link} />
             </ListItem>
           </Link>
@@ -55,3 +64,5 @@ const SideDrawer = ({ toggleDrawer }) => {
 };
 
 export default SideDrawer;
+
+// onClick={(e) => getCategoryById(e, category._id)}

@@ -6,10 +6,13 @@ const SiteContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [productsByCategory, setProductsByCategory] = useState([]);
+  const [productsByBrand, setProductsByBrand] = useState([]);
   const [userSearch, setUserSearch] = useState("");
   const getCart = () => JSON.parse(localStorage.getItem("cart"));
   const [cartItems, setcartItems] = useState(getCart()?.cartItems || []);
   const [cartQty, setcartQty] = useState(getCart()?.cartQty || 0);
+  const [isLoading, setisLoading] = useState(true);
 
   //============================INITIAL LOAD ACTIONS=======================
   // fetches all products
@@ -59,6 +62,24 @@ const SiteContextProvider = ({ children }) => {
     setUserSearch(searched);
   };
 
+  // get products by category selection
+  const getCategoryById = async (id) => {
+    setisLoading(true);
+    const payload = await API.fetch(`/product/category/${id}`);
+    setProductsByCategory(payload);
+    console.log("productsByCategory", productsByCategory.products);
+    setisLoading(false);
+  };
+
+  // get products by brand selection
+  const getBrandById = async (id) => {
+    setisLoading(true);
+    const payload = await API.fetch(`/product/brand/${id}`);
+    setProductsByBrand(payload);
+    console.log("productsByBrand", productsByBrand);
+    setisLoading(false);
+  };
+
   return (
     <SiteContext.Provider
       value={{
@@ -70,6 +91,11 @@ const SiteContextProvider = ({ children }) => {
         userSearch,
         cartItems,
         cartQty,
+        getCategoryById,
+        getBrandById,
+        isLoading,
+        productsByCategory,
+        productsByBrand,
       }}
     >
       {children}

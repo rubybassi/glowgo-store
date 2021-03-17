@@ -3,30 +3,47 @@ import Grid from "@material-ui/core/Grid";
 import ProductCard from "../Product/ProductCard";
 import { useContext } from "react";
 import SiteContext from "../../SiteContext";
-import { useParams } from "react-router-dom";
 import FeaturedHeader from "../HeaderText/FeaturedHeader";
 
 const Categories = () => {
-  const { products, brands } = useContext(SiteContext);
-  let { id } = useParams();
-  console.log("brand params id",id);
+  const { productsByBrand, isLoading } = useContext(SiteContext);
 
   return (
     <div>
-      {brands.length > 0 &&
-        brands
-          .filter((itemid) => itemid._id == id)
-          .map((item) => (
-            <FeaturedHeader
-              key={item._id}
-              name={item.name}
-              description={item.description}
-              image={item.logo}
-            />
-          ))}
+      {isLoading ? (
+        <p>loading...</p>
+      ) : (
+        <FeaturedHeader
+          name={productsByBrand.name}
+          description={productsByBrand.description}
+          image={productsByBrand.logo}
+        />
+      )}
+
       <Grid container spacing={4}>
-        {products.length > 0 ? (
-          products
+        {isLoading ? (
+          <p>fecthing products...</p>
+        ) : (
+          productsByBrand.products.map((item) => (
+            <Grid item key={item._id} xs={12} sm={6} md={4}>
+              <ProductCard item={item} />
+            </Grid>
+          ))
+        )}
+      </Grid>
+    </div>
+  );
+};
+
+export default Categories;
+
+/*
+
+
+
+<Grid container spacing={4}>
+        {productsByBrand.length > 0 ? (
+          productsByBrand
             .filter((itemid) => itemid.brand._id == id)
             .map((item) => (
               <Grid item key={item._id} xs={12} sm={6} md={4}>
@@ -40,8 +57,5 @@ const Categories = () => {
           </p>
         )}
       </Grid>
-    </div>
-  );
-};
 
-export default Categories;
+      */
