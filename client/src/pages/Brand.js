@@ -6,6 +6,7 @@ const Brand = () => {
   return (
     <div>
       <Container>
+      <h4>Brand</h4>
         <Brands />
       </Container>
     </div>

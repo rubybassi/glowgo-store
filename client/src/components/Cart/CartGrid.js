@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductPage = () => {
+const CartGrid = () => {
   return (
     <div>
       
@@ -8,4 +8,5 @@ const ProductPage = () => {
   )
 }
 
-export default ProductPage
+export default CartGrid
+

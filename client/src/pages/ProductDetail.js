@@ -5,7 +5,7 @@ const ProductDetail = () => {
   return (
     <div>
       <Container>
-        <h1>ProductDetail page</h1>
+        <h4>Product</h4>
       </Container>
     </div>
   );

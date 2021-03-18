@@ -5,7 +5,7 @@ const Order = () => {
   return (
     <div>
       <Container>
-        <h1>order page</h1>
+        <h4>Order page</h4>
       </Container>
     </div>
   );

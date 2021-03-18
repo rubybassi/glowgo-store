@@ -5,7 +5,7 @@ const Checkout = () => {
   return (
     <div>
       <Container>
-        <h1>Checkout page</h1>
+        <h4>Checkout page</h4>
       </Container>
     </div>
   );

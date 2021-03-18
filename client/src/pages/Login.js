@@ -5,7 +5,7 @@ const Login = () => {
   return (
     <div>
       <Container>
-        <h1>login page</h1>
+        <h4>Login page</h4>
       </Container>
     </div>
   );

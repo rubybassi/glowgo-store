@@ -11,9 +11,7 @@ const Categories = () => {
 
   return (
     <div>
-      {isLoading ? (
-        <LinearIndeterminate />
-      ) : (
+      {!isLoading && (
         <FeaturedHeader
           name={productsByBrand.name}
           description={productsByBrand.description}
