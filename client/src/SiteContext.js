@@ -8,7 +8,7 @@ const SiteContextProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [productsByCategory, setProductsByCategory] = useState([]);
   const [productsByBrand, setProductsByBrand] = useState([]);
-  const [productById, setproductById] = useState([]);
+  const [productById, setProductById] = useState(null);
   const [userSearch, setUserSearch] = useState("");
   const getCart = () => JSON.parse(localStorage.getItem("cart"));
   const [cartItems, setcartItems] = useState(getCart()?.cartItems || []);
@@ -45,6 +45,37 @@ const SiteContextProvider = ({ children }) => {
     fetchAllBrands();
   }, []);
 
+  //============================USER PRODUCT SELECTION ACTIONS=======================
+  // get products by category selection
+  const getCategoryById = async (id) => {
+    setisLoading(true);
+    const payload = await API.fetch(`/product/category/${id}`);
+    setProductsByCategory(payload);
+    setisLoading(false);
+  };
+  
+  // get products by id on brand selection
+  const getBrandById = async (id) => {
+    setisLoading(true);
+    const payload = await API.fetch(`/product/brand/${id}`);
+    setProductsByBrand(payload);
+    setisLoading(false);
+  };
+  
+  // get products by id on product list selection
+  const getProductById = async (id) => {
+    setisLoading(true);
+    const payload = await API.fetch(`/product/${id}`);
+    setProductById(payload);
+    setisLoading(false);
+    console.log('fetching product by id payload', payload);
+  };
+  
+  // set state when user requests all products selection and trigger fetchAllProducts use effect
+  const getAllProducts = () => {
+    setSeeAllProducts(true);
+  };
+
   //============================CART ACTIONS=======================
   // updates cart states from user add to cart event
   const addtoCart = (item, qty) => {
@@ -64,37 +95,7 @@ const SiteContextProvider = ({ children }) => {
     const searched = e.target.value;
     setUserSearch(searched);
   };
-
-  // get products by category selection
-  const getCategoryById = async (id) => {
-    setisLoading(true);
-    const payload = await API.fetch(`/product/category/${id}`);
-    setProductsByCategory(payload);
-    setisLoading(false);
-  };
-
-  //============================USER PRODUCT SELECTION ACTIONS=======================
-  // get products by id on brand selection
-  const getBrandById = async (id) => {
-    setisLoading(true);
-    const payload = await API.fetch(`/product/brand/${id}`);
-    setProductsByBrand(payload);
-    setisLoading(false);
-  };
-
-  // get products by id on product list selection
-  const getProductById = async (id) => {
-    setisLoading(true);
-    const payload = await API.fetch(`/product/brand/${id}`);
-    setproductById(payload);
-    setisLoading(false);
-  };
-
-  // set state when user requests all products selection and trigger fetchallproducts use effect
-  const getAllProducts = () => {
-    setSeeAllProducts(true);
-  };
-
+  
   return (
     <SiteContext.Provider
       value={{

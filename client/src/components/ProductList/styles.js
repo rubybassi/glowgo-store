@@ -23,4 +23,7 @@ export default makeStyles((theme) => ({
   description: {
     noWrap: true
   },
+  btn: {
+    paddingLeft: 0,
+  },
 }));

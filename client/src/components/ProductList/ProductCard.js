@@ -20,25 +20,26 @@ const Product = ({ item }) => {
 
   return (
     <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image={item.imageProductUrl[0]}
-        title={item.name}
-        onClick={() => getProductById(item.brand._id)} color="primary"
-      />
       <CardContent>
-        <div className={classes.cardContent}>
-          <Link to={`/product/${item._id}`} className={classes.link}>
-            <Typography variant="body1" gutterBottom color="textPrimary">
+        <Link to={`/product/${item._id}`} className={classes.link}>
+          <CardMedia
+            className={classes.media}
+            image={item.imageProductUrl[0]}
+            title={item.name}
+            onClick={() => getProductById(item._id)}
+            color="primary"
+          />
+          <div className={classes.cardContent}>
+            <Typography variant="h6" gutterBottom color="textPrimary">
               {item.name}
             </Typography>
-          </Link>
-          <Typography variant="body1">£{item.price}</Typography>
-        </div>
+            <Typography variant="h6" color="textPrimary">£{item.price}</Typography>
+          </div>
+        </Link>
         <Typography variant="body2" color="textSecondary">
           {item.pkSize}
         </Typography>
-        <Button onClick={() => getBrandById(item.brand._id)} color="primary">
+        <Button onClick={() => getBrandById(item.brand._id)} color="primary" className={classes.btn}>
           <Typography variant="overline" display="block">
             <Link
               to={`/product/brand/${item.brand._id}`}

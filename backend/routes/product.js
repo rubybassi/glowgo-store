@@ -83,8 +83,7 @@ router.get("/:id", async (req, res) => {
   const productId = req.params.id;
   try {
     const queriedProduct = await Product.findById({ _id: productId })
-      .populate("brand")
-      .populate("category");
+      .populate("brand");
     res.status(200).json(queriedProduct);
   } catch (err) {
     res
