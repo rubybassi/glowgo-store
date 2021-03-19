@@ -1,5 +1,11 @@
 import React from "react";
-import { Grid, Typography, CardMedia, Button, Divider } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  CardMedia,
+  Button,
+  Divider,
+} from "@material-ui/core";
 import useStyles from "./styles";
 import { Link } from "react-router-dom";
 
@@ -69,7 +75,7 @@ const ProductPage = ({
             </Button>
           </Grid>
           <Grid item>
-            <Divider className={classes.divider}/>
+            <Divider className={classes.divider} />
             <Typography variant="body1" className={classes.description}>
               {description}
             </Typography>
@@ -81,3 +87,5 @@ const ProductPage = ({
 };
 
 export default ProductPage;
+
+//{onClick={() => addtoCart(item)}

@@ -19,7 +19,6 @@ export default makeStyles((theme) => ({
     marginTop: 20,
     marginBottom: 30,
     borderColor: theme.palette.primary.dark,
-
   },
   link: {
     textDecoration: 'none',

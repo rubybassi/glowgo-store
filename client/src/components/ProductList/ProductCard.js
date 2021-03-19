@@ -24,7 +24,7 @@ const Product = ({ item }) => {
         <Link to={`/product/${item._id}`} className={classes.link}>
           <CardMedia
             className={classes.media}
-            image={item.imageProductUrl[0]}
+            image={item?.imageProductUrl[0]}
             title={item.name}
             onClick={() => getProductById(item._id)}
             color="primary"
@@ -54,7 +54,7 @@ const Product = ({ item }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.CardActions}>
-        <IconButton aria-label="Add to cart" onClick={() => addtoCart(item, 1)}>
+        <IconButton aria-label="Add to cart" onClick={() => addtoCart(item)}>
           <AddShoppingCart addeditem={item} />
         </IconButton>
       </CardActions>

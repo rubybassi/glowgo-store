@@ -8,11 +8,10 @@ const SiteContextProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [productsByCategory, setProductsByCategory] = useState([]);
   const [productsByBrand, setProductsByBrand] = useState([]);
-  const [productById, setProductById] = useState(null);
+  const [productById, setProductById] = useState({});
   const [userSearch, setUserSearch] = useState("");
   const getCart = () => JSON.parse(localStorage.getItem("cart"));
   const [cartItems, setcartItems] = useState(getCart()?.cartItems || []);
-  const [cartQty, setcartQty] = useState(getCart()?.cartQty || 0);
   const [isLoading, setisLoading] = useState(true);
   const [seeAllProducts, setSeeAllProducts] = useState(false);
 
@@ -78,15 +77,15 @@ const SiteContextProvider = ({ children }) => {
 
   //============================CART ACTIONS=======================
   // updates cart states from user add to cart event
-  const addtoCart = (item, qty) => {
+  const addtoCart = (item) => {
     setcartItems((prev) => [...prev, item]);
-    setcartQty((prev) => prev + qty);
+    console.log('items in cart', cartItems);
   };
 
   // pushes cart items to local storage when cart state changes
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify({ cartItems, cartQty }));
-  }, [cartItems, cartQty]);
+    localStorage.setItem("cart", JSON.stringify({ cartItems }));
+  }, [cartItems]);
 
   //============================USER SEARCH ACTIONS=======================
   // pushes cart items to local storage when cart state changes
@@ -95,7 +94,7 @@ const SiteContextProvider = ({ children }) => {
     const searched = e.target.value;
     setUserSearch(searched);
   };
-  
+ 
   return (
     <SiteContext.Provider
       value={{
@@ -107,7 +106,6 @@ const SiteContextProvider = ({ children }) => {
         handleUserSearchInput,
         userSearch,
         cartItems,
-        cartQty,
         getCategoryById,
         getBrandById,
         getProductById,
@@ -115,6 +113,7 @@ const SiteContextProvider = ({ children }) => {
         productsByBrand,
         productById,
         getAllProducts,
+        getCart,
       }}
     >
       {children}

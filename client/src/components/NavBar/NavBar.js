@@ -22,7 +22,7 @@ import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 export default function NavBar() {
-  const { userSearch, handleUserSearchInput, cartQty } = useContext(SiteContext);
+  const { userSearch, handleUserSearchInput, cartItems } = useContext(SiteContext);
 
   // @material ui styling props and functions
   const classes = useStyles();
@@ -89,7 +89,7 @@ export default function NavBar() {
       <MenuItem>
         <Link to={"/cart"} className={classes.link}>
           <IconButton aria-label="show cart items" color="inherit">
-            <Badge badgeContent={cartQty} color="error">
+            <Badge badgeContent={cartItems?.length} color="error">
               <ShoppingCart />
             </Badge>
           </IconButton>
@@ -173,7 +173,7 @@ export default function NavBar() {
           <div className={classes.sectionDesktop}>
             <Link to={"/cart"} className={classes.link}>
               <IconButton aria-label="cart items" color="inherit">
-                <Badge badgeContent={cartQty} color="error">
+                <Badge badgeContent={cartItems?.length} color="error">
                   <ShoppingCart />
                 </Badge>
               </IconButton>
