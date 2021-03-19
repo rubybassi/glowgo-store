@@ -36,13 +36,14 @@ export default makeStyles((theme) => ({
     color: "inherit",
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: theme.spacing(2, 1, 2, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
-    width: "100%",
+    backgroundColor: fade(theme.palette.common.white, 0.60),
+    width: 100,
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+     width: "500px",
     },
   },
   sectionDesktop: {

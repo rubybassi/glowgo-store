@@ -24,4 +24,12 @@ export default makeStyles((theme) => ({
     marginBottom: 30,
     borderColor: theme.palette.primary.dark,
   },
+  checkoutButton: {
+    width: '100%',
+    padding: 10,
+    marginTop: 20,
+    marginBottom: 30,
+    backgroundColor: theme.palette.primary.contrastText,
+    color: theme.palette.primary.light,
+  },
 }));

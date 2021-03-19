@@ -2,6 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 import { Typography, Grid, Button } from "@material-ui/core";
+import HttpsIcon from "@material-ui/icons/Https";
 import useStyles from "./styles";
 
 const CartSummary = () => {
@@ -44,12 +45,21 @@ const CartSummary = () => {
         </Grid>
         <Grid item xs={12}>
           <Button
+            className={classes.checkoutButton}
+            variant="contained"
+            size="medium"
+            display="block"
+            color="primary"
+          >
+            <HttpsIcon></HttpsIcon>Secure Checkout
+          </Button>
+          <Button
             className={classes.button}
             variant="outlined"
             size="medium"
             display="block"
           >
-            Secure Checkout
+            Continue Shopping
           </Button>
         </Grid>
       </Grid>
