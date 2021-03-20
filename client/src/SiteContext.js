@@ -12,16 +12,22 @@ const SiteContextProvider = ({ children }) => {
   const [userSearch, setUserSearch] = useState("");
   const getCart = () => JSON.parse(localStorage.getItem("cart"));
   const [cartItems, setCartItems] = useState(getCart()?.cartItems || []);
-  const [isLoading, setisLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [bestsellers, setBestsellers] = useState([]);
   const [newarrivals, setNewarrivals] = useState([]);
-
   //============================INITIAL LOAD ACTIONS=======================
   // fetches all bestselling products
   useEffect(() => {
     const fetchAllBestsellers = async () => {
-      const payload = await API.fetch("/product/bestsellers");
-      setBestsellers(payload);
+      try {
+        setIsLoading(true);
+        const payload = await API.fetch("/product/bestsellers");
+        setBestsellers(payload);
+        setIsLoading(false);
+      } catch(error) {
+        setBestsellers([]);
+        setIsLoading(false); // add user error message toaster
+      }
     };
     fetchAllBestsellers();
   }, []);
@@ -56,37 +62,37 @@ const SiteContextProvider = ({ children }) => {
   //============================USER PRODUCT SELECTION ACTIONS=======================
   // get products by category selection
   const getCategoryById = async (id) => {
-    setisLoading(true);
+    setIsLoading(true);
     const payload = await API.fetch(`/product/category/${id}`);
     setProductsByCategory(payload);
-    setisLoading(false);
+    setIsLoading(false);
     console.log("fetching all cat products", productsByCategory);
   };
 
   // get products by brand selection
   const getBrandById = async (id) => {
-    setisLoading(true);
+    setIsLoading(true);
     const payload = await API.fetch(`/product/brand/${id}`);
     setProductsByBrand(payload);
-    setisLoading(false);
+    setIsLoading(false);
     console.log("fetching all brand products", productsByBrand);
   };
 
   // get products by id on product list selection
   const getProductById = async (id) => {
-    setisLoading(true);
+    setIsLoading(true);
     const payload = await API.fetch(`/product/${id}`);
     setProductById(payload);
-    setisLoading(false);
+    setIsLoading(false);
     console.log("fetching product by id payload", payload);
   };
 
   // get all products on all products drawer selection
   const getAllProducts = async () => {
-    setisLoading(true);
+    setIsLoading(true);
     const payload = await API.fetch("/product/all");
     setProducts(payload);
-    setisLoading(false);
+    setIsLoading(false);
     console.log("fetching all products", payload);
   };
   //============================CART ACTIONS=======================

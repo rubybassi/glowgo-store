@@ -27,8 +27,8 @@ conn.once("open", function () {
 
 // Define API routes here
 app.use('/product', require('./backend/routes/product.js'));
-app.use('/order', require('./backend/routes/order.js'));
 app.use('/user', require('./backend/routes/user.js'));
+app.use('/', require('./backend/routes/home.js'));
 
 // Send every other request to the React app
 app.get("*", (req, res) => {

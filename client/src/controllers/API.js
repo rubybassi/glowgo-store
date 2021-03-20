@@ -1,13 +1,16 @@
 // ======== refactor to include error and status state
 const API = {
   fetch: async (url) => {
-    const response = await fetch(url);
-    if (response.ok) {
-      const payload = await response.json();
-      return payload;
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const payload = await response.json();
+        return payload;
+      }
+    } catch (error) {
+      throw error;
     }
-    return [];
-  }
+  },
 };
 
 export default API;

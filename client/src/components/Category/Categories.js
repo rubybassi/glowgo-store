@@ -20,7 +20,7 @@ const Categories = ({productsByCategory, isLoading}) => {
         {isLoading ? (
           <LinearIndeterminate />
         ) : (
-          productsByCategory.products.map((item) => (
+          productsByCategory.products?.map((item) => (
             <Grid item key={item._id} xs={12} sm={6} md={4}>
               <ProductCard item={item} />
             </Grid>

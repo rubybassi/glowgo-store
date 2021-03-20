@@ -16,7 +16,7 @@ const CartSummary = () => {
       0
     );
     const roundedSum = Math.round(sum * 100) / 100;
-    return roundedSum;
+    return roundedSum.toFixed(2);
   };
 
   return (

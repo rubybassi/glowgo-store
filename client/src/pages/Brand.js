@@ -3,6 +3,7 @@ import Brands from "../components/Brand/Brands";
 import Container from "@material-ui/core/Container";
 import SiteContext from "../SiteContext";
 import { useParams } from "react-router-dom";
+import LinearIndeterminate from "../components/Loading/LoadingBar";
 
 const Brand = () => {
   const { id } = useParams();
@@ -13,12 +14,12 @@ const Brand = () => {
   }, []);
   return (
     <div>
-      {isLoading ? <h1>fetching...</h1> : 
+      {isLoading ?  <LinearIndeterminate /> : 
       <Container>
         <h4>Brand</h4>
         <Brands productsByBrand={productsByBrand} isLoading={isLoading} />
       </Container>
-      }
+      } 
     </div>
   );
 };
