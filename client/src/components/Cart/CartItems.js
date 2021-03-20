@@ -2,9 +2,10 @@ import React from "react";
 import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 import CartCard from "./CartCard";
+import { Typography } from "@material-ui/core";
 
 const CartItems = () => {
-  const { cartItems } = useContext(SiteContext);
+  const { cartItems, removeItemFromCart } = useContext(SiteContext);
 
   return (
     <div>
@@ -15,10 +16,12 @@ const CartItems = () => {
             name={item.name}
             price={item.price}
             image={item.imageProductUrl[0]}
+            id={item._id}
+            removeItemFromCart={removeItemFromCart}
           />
         ))
       ) : (
-        <h1>There are no items in your cart</h1>
+        <Typography>There are no items in your cart</Typography>
       )}
     </div>
   );

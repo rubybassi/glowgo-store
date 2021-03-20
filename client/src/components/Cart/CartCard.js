@@ -1,13 +1,13 @@
 import React from "react";
-import { Typography, Grid, Button } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 import useStyles from "./styles";
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 
-const CartCard = ({ name, image, price }) => {
+const CartCard = ({ name, image, price, id, removeItemFromCart }) => {
   const classes = useStyles();
+
   return (
-    // remove item button and function
     <>
       <Grid container spacing={2}>
         <Grid item xs={6}>
@@ -16,7 +16,7 @@ const CartCard = ({ name, image, price }) => {
         </Grid>
         <Grid item xs={6}>
           <img className={classes.image} src={image} alt={name} />
-          <IconButton aria-label="delete">
+          <IconButton aria-label="delete" onClick={() => removeItemFromCart(id)}>
             <ClearIcon />
           </IconButton>
         </Grid>

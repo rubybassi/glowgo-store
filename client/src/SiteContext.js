@@ -11,7 +11,7 @@ const SiteContextProvider = ({ children }) => {
   const [productById, setProductById] = useState({});
   const [userSearch, setUserSearch] = useState("");
   const getCart = () => JSON.parse(localStorage.getItem("cart"));
-  const [cartItems, setcartItems] = useState(getCart()?.cartItems || []);
+  const [cartItems, setCartItems] = useState(getCart()?.cartItems || []);
   const [isLoading, setisLoading] = useState(true);
   const [bestsellers, setBestsellers] = useState([]);
   const [newarrivals, setNewarrivals] = useState([]);
@@ -26,8 +26,8 @@ const SiteContextProvider = ({ children }) => {
     fetchAllBestsellers();
   }, []);
 
-   // fetches all bestselling products
-   useEffect(() => {
+  // fetches all bestselling products
+  useEffect(() => {
     const fetchAllNewArrivals = async () => {
       const payload = await API.fetch("/product/newarrivals");
       setNewarrivals(payload);
@@ -60,40 +60,49 @@ const SiteContextProvider = ({ children }) => {
     const payload = await API.fetch(`/product/category/${id}`);
     setProductsByCategory(payload);
     setisLoading(false);
-    console.log('fetching all cat products', productsByCategory);
+    console.log("fetching all cat products", productsByCategory);
   };
-  
+
   // get products by brand selection
   const getBrandById = async (id) => {
     setisLoading(true);
     const payload = await API.fetch(`/product/brand/${id}`);
     setProductsByBrand(payload);
     setisLoading(false);
-    console.log('fetching all brand products', productsByBrand);
+    console.log("fetching all brand products", productsByBrand);
   };
-  
+
   // get products by id on product list selection
   const getProductById = async (id) => {
     setisLoading(true);
     const payload = await API.fetch(`/product/${id}`);
     setProductById(payload);
     setisLoading(false);
-    console.log('fetching product by id payload', payload);
+    console.log("fetching product by id payload", payload);
   };
-  
+
   // get all products on all products drawer selection
   const getAllProducts = async () => {
     setisLoading(true);
     const payload = await API.fetch("/product/all");
     setProducts(payload);
     setisLoading(false);
-    console.log('fetching all products', payload);
+    console.log("fetching all products", payload);
   };
   //============================CART ACTIONS=======================
-  // updates cart states from user add to cart event
+  // updates cart state from user add to cart event
   const addtoCart = (item) => {
-    setcartItems((prev) => [...prev, item]);
-    console.log('items in cart', cartItems);
+    setCartItems((prev) => [...prev, item]);
+    console.log("items in cart", cartItems);
+  };
+
+  // updates cart state when user removes item from cart by index
+  const removeItemFromCart = (id) => {
+    const index = cartItems.findIndex((item) => item._id === id);
+    const newCart = [...cartItems];
+    newCart.splice(index, 1);
+    //console.log(newCart);
+    setCartItems(newCart);
   };
 
   // pushes cart items to local storage when cart state changes
@@ -108,7 +117,7 @@ const SiteContextProvider = ({ children }) => {
     const searched = e.target.value;
     setUserSearch(searched);
   };
- 
+
   return (
     <SiteContext.Provider
       value={{
@@ -129,7 +138,8 @@ const SiteContextProvider = ({ children }) => {
         productById,
         getCart,
         bestsellers,
-        newarrivals
+        newarrivals,
+        removeItemFromCart,
       }}
     >
       {children}

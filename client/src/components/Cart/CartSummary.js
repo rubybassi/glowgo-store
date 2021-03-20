@@ -4,15 +4,19 @@ import SiteContext from "../../SiteContext";
 import { Typography, Grid, Button } from "@material-ui/core";
 import HttpsIcon from "@material-ui/icons/Https";
 import useStyles from "./styles";
+import { Link } from "react-router-dom";
 
 const CartSummary = () => {
   const classes = useStyles();
   const { cartItems } = useContext(SiteContext);
 
   const GetTotalsum = () => {
-  const sum = cartItems.reduce((amount, cartItems) => cartItems.price + amount,0);
-  const roundedSum = Math.round(sum * 100)/100;
-  return roundedSum;
+    const sum = cartItems?.reduce(
+      (amount, cartItems) => cartItems.price + amount,
+      0
+    );
+    const roundedSum = Math.round(sum * 100) / 100;
+    return roundedSum;
   };
 
   return (
@@ -43,7 +47,7 @@ const CartSummary = () => {
         </Grid>
         <Grid item xs={6} className={classes.typography}>
           <Typography variant="body1" color="textPrimary" align="right">
-            £<GetTotalsum/>
+            £<GetTotalsum />
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -56,14 +60,16 @@ const CartSummary = () => {
           >
             <HttpsIcon></HttpsIcon>Secure Checkout
           </Button>
-          <Button
-            className={classes.button}
-            variant="outlined"
-            size="medium"
-            display="block"
-          >
-            Continue Shopping
-          </Button>
+          <Link to={"/"}>
+            <Button
+              className={classes.button}
+              variant="outlined"
+              size="medium"
+              display="block"
+            >
+              Continue Shopping
+            </Button>
+          </Link>
         </Grid>
       </Grid>
     </>
