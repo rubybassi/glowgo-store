@@ -14,6 +14,7 @@ const SiteContextProvider = ({ children }) => {
   const [cartItems, setcartItems] = useState(getCart()?.cartItems || []);
   const [isLoading, setisLoading] = useState(true);
   const [bestsellers, setBestsellers] = useState([]);
+  const [newarrivals, setNewarrivals] = useState([]);
 
   //============================INITIAL LOAD ACTIONS=======================
   // fetches all bestselling products
@@ -23,6 +24,15 @@ const SiteContextProvider = ({ children }) => {
       setBestsellers(payload);
     };
     fetchAllBestsellers();
+  }, []);
+
+   // fetches all bestselling products
+   useEffect(() => {
+    const fetchAllNewArrivals = async () => {
+      const payload = await API.fetch("/product/newarrivals");
+      setNewarrivals(payload);
+    };
+    fetchAllNewArrivals();
   }, []);
 
   // fetches all categories
@@ -118,7 +128,8 @@ const SiteContextProvider = ({ children }) => {
         productsByBrand,
         productById,
         getCart,
-        bestsellers
+        bestsellers,
+        newarrivals
       }}
     >
       {children}

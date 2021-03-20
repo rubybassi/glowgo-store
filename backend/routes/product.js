@@ -16,6 +16,20 @@ router.get("/bestsellers", async (req, res) => {
   }
 });
 
+// @Get all bestsellers with only name and image fields
+router.get("/newarrivals", async (req, res) => {
+  try {
+    const allNewarrivals = await Product.find({newArrivals: true}, 'imageProductUrl name');
+    res.status(200).json(allNewarrivals);
+  } catch (err) {
+    res
+      .status(404)
+      .json({
+        error: "Your request could not be processed. Please try again.",
+      });
+  }
+});
+
 // @Get all products and join brand and category collections
 router.get("/all", async (req, res) => {
   try {
@@ -61,12 +75,11 @@ router.get("/brand", async (req, res) => {
   }
 });
 
-// @Get products by category for category page and category info
+// @Get products by category for category page and category info for header section
 router.get("/category/:id", async (req, res) => {
   const categoryId = req.params.id;
   try {
     const queriedCategory = await Category.findById({_id: categoryId}).populate("products");
-    // add populate query to append product 
     res.status(200).json(queriedCategory);
   } catch (err) {
     res
@@ -77,7 +90,7 @@ router.get("/category/:id", async (req, res) => {
   }
 });
 
-// @Get products by brand for brand page and get brand info
+// @Get products by brand for brand page and get brand info for header section
 router.get("/brand/:id", async (req, res) => {
   const brandId = req.params.id;
   try {
@@ -92,7 +105,7 @@ router.get("/brand/:id", async (req, res) => {
   }
 });
 
-// @Get product by id and join brand and category collections
+// @Get product by id and join brand collections
 router.get("/:id", async (req, res) => {
   const productId = req.params.id;
   try {

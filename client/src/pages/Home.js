@@ -6,14 +6,13 @@ import HomeCarousel from "../components/Carousels/HomeCarousel";
 import Container from "@material-ui/core/Container";
 
 const Home = () => {
-  const { bestsellers, newarrivals } = useContext(SiteContext);
+  const { bestsellers } = useContext(SiteContext);
   return (
     <div>
       <Container>
         <h4>Home</h4>
         <HomeCarousel />
         <FeaturedCarousel items={bestsellers} header={"BestSellers"}/>
-        <FeaturedCarousel items={bestsellers} header={"New Arrivals"}/>
       </Container>
     </div>
   );

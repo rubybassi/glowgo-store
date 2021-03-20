@@ -5,14 +5,14 @@ import ProductPage from "./ProductPage";
 import LinearIndeterminate from "../Loading/LoadingBar";
 
 const Product = ({product, isLoading}) => {
-  const { getBrandById } = useContext(SiteContext);
+  const { getBrandById, addtoCart } = useContext(SiteContext);
 
   return (
     <>
       {isLoading ? (
         <LinearIndeterminate />
       ) : (
-        <ProductPage {...product} getBrandById={getBrandById} />
+        <ProductPage {...product} getBrandById={getBrandById} item={product} addtoCart={addtoCart}/>
       )}
     </>
   );

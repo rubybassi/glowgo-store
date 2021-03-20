@@ -8,29 +8,22 @@ import useStyles from "./styles";
 const CartSummary = () => {
   const classes = useStyles();
   const { cartItems } = useContext(SiteContext);
+
+  const GetTotalsum = () => {
+  const sum = cartItems.reduce((amount, cartItems) => cartItems.price + amount,0);
+  const roundedSum = Math.round(sum * 100)/100;
+  return roundedSum;
+  };
+
   return (
     <>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Typography variant="body1">Total items</Typography>
+          <Typography variant="body1">Total Items</Typography>
         </Grid>
         <Grid item xs={6} className={classes.typography}>
           <Typography variant="body1" color="textPrimary" align="right">
             ({cartItems?.length})
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="body1" color="textPrimary">
-            Order Total
-          </Typography>
-        </Grid>
-        <Grid item xs={6} className={classes.typography}>
-          <Typography variant="body1" color="textPrimary" align="right">
-            £
-            {cartItems?.reduce(
-              (amount, cartItems) => cartItems.price + amount,
-              0
-            )}
           </Typography>
         </Grid>
         <Grid item xs={6}>
@@ -41,6 +34,16 @@ const CartSummary = () => {
         <Grid item xs={6} className={classes.typography}>
           <Typography variant="body1" color="textPrimary">
             £{0.0}
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="body1" color="textPrimary">
+            Order Total
+          </Typography>
+        </Grid>
+        <Grid item xs={6} className={classes.typography}>
+          <Typography variant="body1" color="textPrimary" align="right">
+            £<GetTotalsum/>
           </Typography>
         </Grid>
         <Grid item xs={12}>
