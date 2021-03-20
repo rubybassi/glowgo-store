@@ -1,11 +1,12 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
+import SignUp from "../components/Forms/SignUp";
 
 const Register = () => {
   return (
     <div>
       <Container>
-        <h1>Register page</h1>
+        <SignUp/>
       </Container>
     </div>
   );

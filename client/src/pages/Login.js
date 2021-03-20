@@ -1,11 +1,12 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
+import SignUp from "../components/Forms/SignIn";
 
 const Login = () => {
   return (
     <div>
       <Container>
-        <h4>Login page</h4>
+        <SignUp/>
       </Container>
     </div>
   );
