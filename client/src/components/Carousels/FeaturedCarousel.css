@@ -1,0 +1,17 @@
+.slick-slide img {
+  width: 70%;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+
+.slick-initialized .slick-slide {
+  height: 370px;
+}
+
+h3 {
+  padding-top: 30px;
+  text-align: center;
+}

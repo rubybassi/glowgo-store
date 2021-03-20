@@ -2,14 +2,10 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useContext } from "react";
-import SiteContext from "../../SiteContext";
-import "./styles.css";
+import "./FeaturedCarousel.css";
 import { Typography } from "@material-ui/core";
 
-const Bestsellers = () => {
-  const { products } = useContext(SiteContext);
-
+const FeaturedCarousel = ({ items, header }) => {
   const settings = {
     dots: true,
     infinite: false,
@@ -21,8 +17,8 @@ const Bestsellers = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 5,
-          slidesToScroll: 5,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           infinite: true,
           dots: true,
         },
@@ -47,22 +43,20 @@ const Bestsellers = () => {
 
   return (
     <div>
-      <h3>Bestsellers</h3>
+      <h3>{header}</h3>
       <Slider {...settings}>
-        {products.length > 0 &&
-          products
-            .filter((item) => item.bestSeller == true)
-            .map((item) => (
-              <div key={item._id} className="slider">
-                <img src={item.imageProductUrl[0]} />
-                <Typography variant="body1" gutterBottom color="textPrimary">
-                  {item.name}
-                </Typography>
-              </div>
-            ))}
+        {items.length > 0 &&
+          items.map((item) => (
+            <div key={item._id}>
+              <img src={item?.imageProductUrl[0]} />
+              <Typography variant="body1" color="textPrimary" align="center">
+                {item.name}
+              </Typography>
+            </div>
+          ))}
       </Slider>
     </div>
   );
 };
 
-export default Bestsellers;
+export default FeaturedCarousel;

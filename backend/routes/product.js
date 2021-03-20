@@ -2,12 +2,26 @@ const express = require("express");
 const router = express.Router();
 const { Product, Brand, Category } = require("../../database/index");
 
+// @Get all bestsellers with only name and image fields
+router.get("/bestsellers", async (req, res) => {
+  try {
+    const allBestsellers = await Product.find({bestSeller: true}, 'imageProductUrl name');
+    res.status(200).json(allBestsellers);
+  } catch (err) {
+    res
+      .status(404)
+      .json({
+        error: "Your request could not be processed. Please try again.",
+      });
+  }
+});
+
 // @Get all products and join brand and category collections
 router.get("/all", async (req, res) => {
   try {
     const allProducts = await Product.find({})
-      .populate("brand")
-      .populate("category");
+      .populate("brand", '_id name')
+      .populate("category", '_id name');
     res.status(200).json(allProducts);
   } catch (err) {
     res
@@ -47,7 +61,7 @@ router.get("/brand", async (req, res) => {
   }
 });
 
-// @Get products by category for category page
+// @Get products by category for category page and category info
 router.get("/category/:id", async (req, res) => {
   const categoryId = req.params.id;
   try {
@@ -63,7 +77,7 @@ router.get("/category/:id", async (req, res) => {
   }
 });
 
-// @Get products by brand for brand page
+// @Get products by brand for brand page and get brand info
 router.get("/brand/:id", async (req, res) => {
   const brandId = req.params.id;
   try {

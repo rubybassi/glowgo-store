@@ -23,7 +23,6 @@ const ProductPage = ({
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
-        {/*image wrapper*/}
         <Grid item xs={12} sm={6}>
           <CardMedia
             className={classes.media}
@@ -31,11 +30,9 @@ const ProductPage = ({
             title={name}
           />
         </Grid>
-
-        {/*product info wrapper*/}
         <Grid item xs={12} sm={6}>
           <Grid item>
-            <Typography variant="h3" gutterBottom color="textPrimary">
+            <Typography variant="h3" align="left" gutterBottom color="textPrimary">
               {name}
             </Typography>
           </Grid>
@@ -60,7 +57,6 @@ const ProductPage = ({
               </Typography>
             </Button>
           </Grid>
-
           <Grid item>
             <Typography variant="h5"> £{price}</Typography>
           </Grid>
@@ -87,5 +83,3 @@ const ProductPage = ({
 };
 
 export default ProductPage;
-
-//{onClick={() => addtoCart(item)}

@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const { getProductById } = useContext(SiteContext);
+  const { getProductById, productById, isLoading } = useContext(SiteContext);
   useEffect(() => {
     getProductById(id);
     console.log("product in product useeffect", id);
@@ -16,7 +16,7 @@ const ProductDetail = () => {
     <div>
       <Container>
         <h4>Product</h4>
-        <Product />
+        <Product product={productById} isLoading={isLoading}/>
       </Container>
     </div>
   );

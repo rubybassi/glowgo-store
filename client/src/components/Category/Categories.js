@@ -1,14 +1,11 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import ProductCard from "../ProductList/ProductCard";
-import { useContext } from "react";
-import SiteContext from "../../SiteContext";
 import FeaturedHeader from "../HeaderText/FeaturedHeader";
 import LinearIndeterminate from "../Loading/LoadingBar";
 
-const Categories = () => {
-  const { productsByCategory, isLoading } = useContext(SiteContext);
-
+const Categories = ({productsByCategory, isLoading}) => {
+  
   return (
     <div>
       {!isLoading && (

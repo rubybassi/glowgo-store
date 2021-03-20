@@ -13,18 +13,17 @@ const SiteContextProvider = ({ children }) => {
   const getCart = () => JSON.parse(localStorage.getItem("cart"));
   const [cartItems, setcartItems] = useState(getCart()?.cartItems || []);
   const [isLoading, setisLoading] = useState(true);
-  const [seeAllProducts, setSeeAllProducts] = useState(false);
+  const [bestsellers, setBestsellers] = useState([]);
 
   //============================INITIAL LOAD ACTIONS=======================
-  // fetches all products and rerenders when shop all products is selected
+  // fetches all bestselling products
   useEffect(() => {
-    const fetchAllProducts = async () => {
-      const payload = await API.fetch("/product/all");
-      setProducts(payload);
+    const fetchAllBestsellers = async () => {
+      const payload = await API.fetch("/product/bestsellers");
+      setBestsellers(payload);
     };
-    fetchAllProducts();
-    setSeeAllProducts(false);
-  }, [seeAllProducts]);
+    fetchAllBestsellers();
+  }, []);
 
   // fetches all categories
   useEffect(() => {
@@ -51,14 +50,16 @@ const SiteContextProvider = ({ children }) => {
     const payload = await API.fetch(`/product/category/${id}`);
     setProductsByCategory(payload);
     setisLoading(false);
+    console.log('fetching all cat products', productsByCategory);
   };
   
-  // get products by id on brand selection
+  // get products by brand selection
   const getBrandById = async (id) => {
     setisLoading(true);
     const payload = await API.fetch(`/product/brand/${id}`);
     setProductsByBrand(payload);
     setisLoading(false);
+    console.log('fetching all brand products', productsByBrand);
   };
   
   // get products by id on product list selection
@@ -70,11 +71,14 @@ const SiteContextProvider = ({ children }) => {
     console.log('fetching product by id payload', payload);
   };
   
-  // set state when user requests all products selection and trigger fetchAllProducts use effect
-  const getAllProducts = () => {
-    setSeeAllProducts(true);
+  // get all products on all products drawer selection
+  const getAllProducts = async () => {
+    setisLoading(true);
+    const payload = await API.fetch("/product/all");
+    setProducts(payload);
+    setisLoading(false);
+    console.log('fetching all products', payload);
   };
-
   //============================CART ACTIONS=======================
   // updates cart states from user add to cart event
   const addtoCart = (item) => {
@@ -109,11 +113,12 @@ const SiteContextProvider = ({ children }) => {
         getCategoryById,
         getBrandById,
         getProductById,
+        getAllProducts,
         productsByCategory,
         productsByBrand,
         productById,
-        getAllProducts,
         getCart,
+        bestsellers
       }}
     >
       {children}
@@ -123,9 +128,3 @@ const SiteContextProvider = ({ children }) => {
 
 export default SiteContext;
 export { SiteContextProvider };
-
-// old code for possible reuse or reference
-/*const toggleMessage = async (num) => {
-    setMessage( message => !message); // toggles state
-    console.log('button clicked');
-  } */

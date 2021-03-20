@@ -1,24 +1,19 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import ProductCard from "../ProductList/ProductCard";
-import { useContext } from "react";
-import SiteContext from "../../SiteContext";
 import FeaturedHeader from "../HeaderText/FeaturedHeader";
 import LinearIndeterminate from "../Loading/LoadingBar";
 
-const Categories = () => {
-  const { productsByBrand, isLoading } = useContext(SiteContext);
-
+const Brands = ({ productsByBrand, isLoading}) => {
   return (
     <div>
-      {!isLoading && (
+      {!isLoading && ( 
         <FeaturedHeader
           name={productsByBrand.name}
           description={productsByBrand.description}
           image={productsByBrand.logo}
         />
       )}
-
       <Grid container spacing={4}>
         {isLoading ? (
           <LinearIndeterminate />
@@ -34,7 +29,7 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default Brands;
 
 /*
 

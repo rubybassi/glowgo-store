@@ -25,7 +25,7 @@ const SideDrawer = ({ toggleDrawer }) => {
       />
       <List className={classes.listLink}>
         <Link to={"/product/all"}>
-          <ListItem button button onClick={getAllProducts}>
+          <ListItem button onClick={getAllProducts}>
             <ListItemText primary="All Products" className={classes.link} />
           </ListItem>
         </Link>
