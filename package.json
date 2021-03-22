@@ -19,9 +19,14 @@
     "nodemon": "^1.18.7"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^8.2.0",
-    "express": "^4.16.3",
+    "express": "^4.17.1",
     "if-env": "^1.0.4",
-    "mongoose": "^5.11.19"
+    "install": "^0.13.0",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.19",
+    "npm": "^7.6.3"
   }
 }

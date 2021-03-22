@@ -76,6 +76,10 @@ export default function SignUp() {
     const response = await fetch(queryURL, config);
     const payload = await response.json();
     console.log("user saved to db", payload);
+    setFirstName('');
+    setSurname('');
+    setEmail('');
+    setPassword('');
   };
 
   return (

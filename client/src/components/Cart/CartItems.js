@@ -14,7 +14,7 @@ const CartItems = () => {
           <CartCard
             key={index}
             name={item.name}
-            price={item.price}
+            price={item.price.toFixed(2)}
             image={item.imageProductUrl[0]}
             id={item._id}
             removeItemFromCart={removeItemFromCart}

@@ -35,7 +35,7 @@ const Product = ({ item }) => {
               {item.name}
             </Typography>
             <Typography variant="h6" color="textPrimary">
-              £{item.price}
+              £{item.price.toFixed(2)}
             </Typography>
           </div>
         <Typography variant="body2" color="textSecondary">

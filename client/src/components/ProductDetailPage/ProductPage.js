@@ -60,7 +60,7 @@ const ProductPage = ({
             </Button>
           </Grid>
           <Grid item>
-            <Typography variant="h5"> £{price}</Typography>
+            <Typography variant="h5"> £{price.toFixed(2)}</Typography>
           </Grid>
           <Grid item>
             <Button

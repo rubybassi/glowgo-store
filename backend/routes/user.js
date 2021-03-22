@@ -1,13 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-// protected routes that will require auth to enter
+// @post checkout / order
 
-// @post cart
-//<Route exact path="/user/checkout" component={Checkout} />
-
-// @get order history
-//<Route exact path="/user/order" component={Order} />
-
+// @get order history 
 
 module.exports = router;
