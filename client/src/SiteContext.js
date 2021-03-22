@@ -15,6 +15,21 @@ const SiteContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [bestsellers, setBestsellers] = useState([]);
   const [newarrivals, setNewarrivals] = useState([]);
+  const [shipping, setShipping] = useState([{
+    firstname: "",
+    surname: "",
+    address1: "",
+    address2: "",
+    city: "",
+    postcode: "",
+  }]);
+  const [payment, setPayment] = useState([{
+    number: "",
+    name: "",
+    expiry: "",
+    cvv: "",
+  }]);
+
   //============================INITIAL LOAD ACTIONS=======================
   // fetches all bestselling products
   useEffect(() => {
@@ -24,7 +39,7 @@ const SiteContextProvider = ({ children }) => {
         const payload = await API.fetch("/product/bestsellers");
         setBestsellers(payload);
         setIsLoading(false);
-      } catch(error) {
+      } catch (error) {
         setBestsellers([]);
         setIsLoading(false); // add user error message toaster
       }
@@ -146,6 +161,10 @@ const SiteContextProvider = ({ children }) => {
         bestsellers,
         newarrivals,
         removeItemFromCart,
+        shipping,
+        payment,
+        setShipping,
+        setPayment
       }}
     >
       {children}
