@@ -1,14 +1,14 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import React from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 import useStyles from "./styles";
 import { useContext } from "react";
 import SiteContext from "../../SiteContext";
@@ -16,19 +16,26 @@ import SiteContext from "../../SiteContext";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="/">
         glowgo
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
 export default function SignIn() {
   const classes = useStyles();
-  const { onUserSignIn, email, password, onEmail, onPassword } = useContext(SiteContext);
+  const {
+    onUserSignIn,
+    email,
+    password,
+    onEmail,
+    onPassword,
+    errorMessage,
+  } = useContext(SiteContext);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -87,6 +94,7 @@ export default function SignIn() {
       <Box mt={8}>
         <Copyright />
       </Box>
+      {errorMessage !== "" && <p>{errorMessage} </p>}
     </Container>
   );
 }

@@ -22,7 +22,12 @@ import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 export default function NavBar() {
-  const { userSearch, handleUserSearchInput, cartItems } = useContext(SiteContext);
+  const {
+    userSearch,
+    handleUserSearchInput,
+    cartItems,
+    userPayload,
+  } = useContext(SiteContext);
 
   // @material ui styling props and functions
   const classes = useStyles();
@@ -171,6 +176,9 @@ export default function NavBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            
+            {userPayload && (<h5>Hello {userPayload.user?.firstname}</h5>)}
+
             <Link to={"/cart"} className={classes.link}>
               <IconButton aria-label="cart items" color="inherit">
                 <Badge badgeContent={cartItems?.length} color="error">

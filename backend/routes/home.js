@@ -65,24 +65,22 @@ router.post("/login", async (req, res) => {
 
     // checks if user email exists in db
     const queryUser = await User.findOne({ email: authUser.email });
+    console.log("queries user", queryUser);
     if (!queryUser) {
-      return res
-        .status(409)
-        .json({
-          success: false,
-          payload: { message: `No user found for that email` },
-        });
+      return res.status(409).json({
+        success: false,
+        payload: { message: `No user found for that email` },
+      });
     }
 
     // compare password to validate user sigining in vs user stored in db
-    const match = bcrypt.compare(authUser.password, queryUser.password);
+    const match = await bcrypt.compare(authUser.password, queryUser.password);
+    console.log("bcrypt match", match);
     if (!match) {
-      return res
-        .status(401)
-        .json({
-          success: false,
-          payload: { message: `Password is incorrect` },
-        });
+      return res.status(401).json({
+        success: false,
+        payload: { message: `Password is incorrect` },
+      });
     }
 
     // generate token
@@ -90,7 +88,7 @@ router.post("/login", async (req, res) => {
       { id: queryUser.id },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: '24h',
+        expiresIn: "24h",
       }
     );
     if (!token) {
@@ -107,10 +105,14 @@ router.post("/login", async (req, res) => {
     };
 
     // return sanitised data
-    res.status(200).json({ success: true, payload: { user: user, token } });
-
+    res.status(200).json({ 
+      success: true, 
+      payload: { 
+        token, 
+        user: user 
+      } });
   } catch (err) {
-    res.status(404).json({
+    res.status(403).json({
       error: "Your request could not be processed. Please try again.",
     });
   }

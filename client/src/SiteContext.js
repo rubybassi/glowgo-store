@@ -14,45 +14,63 @@ const SiteContextProvider = ({ children }) => {
   const [newarrivals, setNewarrivals] = useState([]);
   const getCart = () => JSON.parse(localStorage.getItem("cart"));
   const [cartItems, setCartItems] = useState(getCart()?.cartItems || []);
-  
+
   // status states
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
-   // user states
+  // user states
   const [userSearch, setUserSearch] = useState("");
-  const [shipping, setShipping] = useState([{
-    firstname: "",
-    surname: "",
-    address1: "",
-    address2: "",
-    city: "",
-    postcode: "",
-  }]);
-  const [payment, setPayment] = useState([{
-    number: "",
-    name: "",
-    expiry: "",
-    cvv: "",
-  }]);
-  //const [isRegistered,  setIsRegistered] = useState(false);
-  const [isLoggedIn,  setIsloggedIn] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [shipping, setShipping] = useState([
+    {
+      firstname: "",
+      surname: "",
+      address1: "",
+      address2: "",
+      city: "",
+      postcode: "",
+    },
+  ]);
+  const [payment, setPayment] = useState([
+    {
+      number: "",
+      name: "",
+      expiry: "",
+      cvv: "",
+    },
+  ]);
 
-  // signin function
+  const [isLoggedIn, setIsloggedIn] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [userPayload, setUserPayload] = useState({});
+  
+  // posts user sign in then sets state and local storage if successfull
   const onUserSignIn = async (e) => {
     e.preventDefault();
-    console.log('signed in with', email, password);
-    //setIsloggedIn(true);
-    const user = {
-      email,
-      password,
-    };
-    const response = await API.fetch("/login", user);
-    console.log("user login saved to db", response);
-    setEmail('');
-    setPassword('');
+    const newUser = {email,password};
+    const response = await API.fetch("/login", newUser);
+    if (response.success && response.payload.token) {
+      setUserPayload(response.payload);
+      setIsloggedIn(true);
+      localStorage.setItem('user', JSON.stringify(response.payload));
+      setErrorMessage('');
+    } else {
+      setIsloggedIn(false);
+      setErrorMessage(
+        "There has been an error logging in. Please try again using your correct credentials"
+      );
+    }
+    setEmail("");
+    setPassword("");
   };
+
+  // pushes logged userstate to local storage
+  useEffect(() => {
+    const getUserfromstore = JSON.parse(localStorage.getItem("user"));
+    if (!getUserfromstore) return null;
+    setUserPayload(getUserfromstore);
+  }, []);
 
   // on passsword submit
   const onPassword = (e) => {
@@ -201,9 +219,12 @@ const SiteContextProvider = ({ children }) => {
         setPayment,
         email,
         password,
-        onUserSignIn, 
-        onEmail, 
-        onPassword
+        onUserSignIn,
+        onEmail,
+        onPassword,
+        isLoggedIn,
+        errorMessage,
+        userPayload,
       }}
     >
       {children}
