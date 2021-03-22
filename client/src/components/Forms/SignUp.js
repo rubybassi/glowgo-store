@@ -8,8 +8,9 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import API from "../../controllers/API";
+import useStyles from "./styles";
 
 function Copyright() {
   return (
@@ -24,32 +25,8 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  link: {
-    color: theme.palette.secondary.contrastText,
-  },
-}));
-
 export default function SignUp() {
   const classes = useStyles();
-
   const [firstname, setFirstName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
@@ -63,19 +40,8 @@ export default function SignUp() {
       email,
       password,
     };
-    console.log("form submitted with user", user);
-    const queryURL = "/register";
-    const config = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    };
-    const response = await fetch(queryURL, config);
-    const payload = await response.json();
-    console.log("user saved to db", payload);
+    const response = await API.fetch("/register", user);
+    console.log("user saved to db", response);
     setFirstName('');
     setSurname('');
     setEmail('');
@@ -144,6 +110,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>

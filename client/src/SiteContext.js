@@ -3,18 +3,23 @@ const SiteContext = createContext();
 import API from "./controllers/API";
 
 const SiteContextProvider = ({ children }) => {
+  // product states
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const [productsByCategory, setProductsByCategory] = useState([]);
   const [productsByBrand, setProductsByBrand] = useState([]);
   const [productById, setProductById] = useState({});
-  const [userSearch, setUserSearch] = useState("");
-  const getCart = () => JSON.parse(localStorage.getItem("cart"));
-  const [cartItems, setCartItems] = useState(getCart()?.cartItems || []);
-  const [isLoading, setIsLoading] = useState(true);
   const [bestsellers, setBestsellers] = useState([]);
   const [newarrivals, setNewarrivals] = useState([]);
+  const getCart = () => JSON.parse(localStorage.getItem("cart"));
+  const [cartItems, setCartItems] = useState(getCart()?.cartItems || []);
+  
+  // status states
+  const [isLoading, setIsLoading] = useState(true);
+
+   // user states
+  const [userSearch, setUserSearch] = useState("");
   const [shipping, setShipping] = useState([{
     firstname: "",
     surname: "",
@@ -29,6 +34,35 @@ const SiteContextProvider = ({ children }) => {
     expiry: "",
     cvv: "",
   }]);
+  //const [isRegistered,  setIsRegistered] = useState(false);
+  const [isLoggedIn,  setIsloggedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // signin function
+  const onUserSignIn = async (e) => {
+    e.preventDefault();
+    console.log('signed in with', email, password);
+    //setIsloggedIn(true);
+    const user = {
+      email,
+      password,
+    };
+    const response = await API.fetch("/login", user);
+    console.log("user login saved to db", response);
+    setEmail('');
+    setPassword('');
+  };
+
+  // on passsword submit
+  const onPassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  // on email submit
+  const onEmail = (e) => {
+    setEmail(e.target.value);
+  };
 
   //============================INITIAL LOAD ACTIONS=======================
   // fetches all bestselling products
@@ -132,7 +166,7 @@ const SiteContextProvider = ({ children }) => {
   }, [cartItems]);
 
   //============================USER SEARCH ACTIONS=======================
-  // pushes cart items to local storage when cart state changes
+  // gets and sets user input from search bar
   const handleUserSearchInput = (e) => {
     console.log("user value", e.target.value);
     const searched = e.target.value;
@@ -164,7 +198,12 @@ const SiteContextProvider = ({ children }) => {
         shipping,
         payment,
         setShipping,
-        setPayment
+        setPayment,
+        email,
+        password,
+        onUserSignIn, 
+        onEmail, 
+        onPassword
       }}
     >
       {children}
