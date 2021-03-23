@@ -50,7 +50,7 @@ const SiteContextProvider = ({ children }) => {
   const onUserSignIn = async (e) => {
     e.preventDefault();
     const newUser = {email,password};
-    if (email.length === 0 || email.length < 3 && password.length === 0 || password.length < 3) {
+    if (email.length < 3 || password.length < 3) {
       setErrorMessage("Please enter a value");  
       return;
     }
@@ -85,6 +85,12 @@ const SiteContextProvider = ({ children }) => {
   // on email submit
   const onEmail = (e) => {
     setEmail(e.target.value);
+  };
+
+  // logs out user on request and clears user toekn and payload
+  const onLogOut = () => {
+    setIsloggedIn(false);
+    localStorage.clear("user");
   };
 
   //============================INITIAL PRODUCT LOAD ACTIONS=======================
@@ -179,7 +185,6 @@ const SiteContextProvider = ({ children }) => {
     const index = cartItems.findIndex((item) => item._id === id);
     const newCart = [...cartItems];
     newCart.splice(index, 1);
-    //console.log(newCart);
     setCartItems(newCart);
   };
 
@@ -230,7 +235,8 @@ const SiteContextProvider = ({ children }) => {
         isLoggedIn,
         errorMessage,
         userPayload,
-        setErrorMessage
+        setErrorMessage,
+        onLogOut
       }}
     >
       {children}

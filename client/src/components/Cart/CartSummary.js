@@ -52,7 +52,7 @@ const CartSummary = () => {
         </Grid>
         <Grid item xs={12}>
           
-          {isLoggedIn ? (
+          {isLoggedIn && (
           <Button
             className={classes.checkoutButton}
             variant="contained"
@@ -62,7 +62,9 @@ const CartSummary = () => {
           >
             <HttpsIcon></HttpsIcon>Secure Checkout
           </Button>
-          ) : 
+          )}
+
+          {!isLoggedIn && (
           <Link to={"/login"}>
           <Button
             className={classes.button}
@@ -73,7 +75,7 @@ const CartSummary = () => {
             Login
           </Button>
         </Link>
-          }
+          )}
 
           <Link to={"/"}>
             <Button

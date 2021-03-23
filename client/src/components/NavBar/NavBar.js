@@ -10,7 +10,7 @@ import {
   MenuItem,
   Menu,
   Drawer,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
@@ -28,6 +28,8 @@ export default function NavBar() {
     handleUserSearchInput,
     cartItems,
     userPayload,
+    onLogOut,
+    isLoggedIn,
   } = useContext(SiteContext);
 
   // @material ui styling props and functions
@@ -54,6 +56,12 @@ export default function NavBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleMenuCloseLogout = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    onLogOut();
+  };
+
   // user dropdown function - desktop
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -66,17 +74,32 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
-        <Link to={"/register"} className={classes.link}>
-          <p>Register</p>
-        </Link>
-      </MenuItem>
-
-      <MenuItem onClick={handleMenuClose}>
-        <Link to={"/login"} className={classes.link}>
-          <p>Login</p>
-        </Link>
-      </MenuItem>
+      {!isLoggedIn && (
+        <MenuItem onClick={handleMenuClose}>
+          <Link to={"/register"} className={classes.link}>
+            <p>Register</p>
+          </Link>
+        </MenuItem>
+      )}
+      {!isLoggedIn && (
+        <MenuItem onClick={handleMenuClose}>
+          <Link to={"/login"} className={classes.link}>
+            <p>Login</p>
+          </Link>
+        </MenuItem>
+      )}
+      {isLoggedIn && (
+        <MenuItem onClick={handleMenuClose}>
+          <Link to={"/user/order"} className={classes.link}>
+            <p>My Account</p>
+          </Link>
+        </MenuItem>
+      )}
+      {isLoggedIn && (
+        <MenuItem onClick={handleMenuCloseLogout}>
+          <p>Logout</p>
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -177,8 +200,11 @@ export default function NavBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            
-            {userPayload && (<Typography variant="h6" className={classes.name}>Hello {userPayload.user?.firstname}</Typography>)}
+            {isLoggedIn && (
+              <Typography variant="h6" className={classes.name}>
+                Hello {userPayload.user?.firstname}
+              </Typography>
+            )}
 
             <Link to={"/cart"} className={classes.link}>
               <IconButton aria-label="cart items" color="inherit">
