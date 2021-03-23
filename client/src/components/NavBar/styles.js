@@ -73,4 +73,11 @@ export default makeStyles((theme) => ({
     textDecoration: "none",
     color: theme.palette.primary.dark,
   },
+  name: {
+    fontFamily: 'Shadows Into Light',
+    fontWeight: "100",
+    fontStyle: 'italic',
+    fontSize: '1.3rem',
+    paddingTop: 10
+  }
 }));

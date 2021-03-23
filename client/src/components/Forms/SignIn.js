@@ -48,6 +48,7 @@ export default function SignIn() {
           Sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={onUserSignIn}>
+        {errorMessage !== "" && <Typography component="h6">{errorMessage} </Typography>}
           <TextField
             variant="outlined"
             margin="normal"
@@ -95,7 +96,6 @@ export default function SignIn() {
       <Box mt={8}>
         <Copyright />
       </Box>
-      {errorMessage !== "" && <p>{errorMessage} </p>}
     </Container>
   );
 }

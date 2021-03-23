@@ -10,6 +10,7 @@ import {
   MenuItem,
   Menu,
   Drawer,
+  Typography
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
@@ -177,7 +178,7 @@ export default function NavBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             
-            {userPayload && (<h5>Hello {userPayload.user?.firstname}</h5>)}
+            {userPayload && (<Typography variant="h6" className={classes.name}>Hello {userPayload.user?.firstname}</Typography>)}
 
             <Link to={"/cart"} className={classes.link}>
               <IconButton aria-label="cart items" color="inherit">

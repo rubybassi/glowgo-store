@@ -9,16 +9,15 @@ const { signinAuthSchema } = require("../authentication/signinSchema");
 // @POST user register
 router.post("/register", async (req, res) => {
   try {
-    //const { firstname, surname, email, password } = req.body;
 
     // validate user
     const authUser = await registerAuthSchema.validateAsync(req.body);
-    console.log("auth user", authUser);
+    //console.log("auth user", authUser);
 
     // hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(authUser.password, salt);
-    console.log("userschema middleware hashed", hashedPassword);
+    //console.log("userschema middleware hashed", hashedPassword);
 
     // check if email already exists in db
     const queryUser = await User.findOne({ email: authUser.email });
@@ -57,15 +56,14 @@ router.post("/register", async (req, res) => {
 // @POST sign in - add validate body middleware, then send jwt token and non-sensitive user info
 router.post("/login", async (req, res) => {
   try {
-    //const { email, password } = req.body;
 
     // validate user
     const authUser = await signinAuthSchema.validateAsync(req.body);
-    console.log("auth user", authUser);
+    //console.log("auth user", authUser);
 
     // checks if user email exists in db
     const queryUser = await User.findOne({ email: authUser.email });
-    console.log("queries user", queryUser);
+    //console.log("queries user", queryUser);
     if (!queryUser) {
       return res.status(409).json({
         success: false,
@@ -75,7 +73,7 @@ router.post("/login", async (req, res) => {
 
     // compare password to validate user sigining in vs user stored in db
     const match = await bcrypt.compare(authUser.password, queryUser.password);
-    console.log("bcrypt match", match);
+    //console.log("bcrypt match", match);
     if (!match) {
       return res.status(401).json({
         success: false,

@@ -50,8 +50,12 @@ const SiteContextProvider = ({ children }) => {
   const onUserSignIn = async (e) => {
     e.preventDefault();
     const newUser = {email,password};
+    if (email.length === 0 || email.length < 3 && password.length === 0 || password.length < 3) {
+      setErrorMessage("Please enter a value");  
+      return;
+    }
     const response = await API.fetch("/login", newUser);
-    if (response.success && response.payload.token) {
+    if (response?.success && response?.payload.token) {
       setUserPayload(response.payload);
       setIsloggedIn(true);
       localStorage.setItem('user', JSON.stringify(response.payload));
@@ -226,6 +230,7 @@ const SiteContextProvider = ({ children }) => {
         isLoggedIn,
         errorMessage,
         userPayload,
+        setErrorMessage
       }}
     >
       {children}

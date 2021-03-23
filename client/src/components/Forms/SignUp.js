@@ -11,6 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import API from "../../controllers/API";
 import useStyles from "./styles";
+import { useContext } from "react";
+import SiteContext from "../../SiteContext";
 
 function Copyright() {
   return (
@@ -26,6 +28,7 @@ function Copyright() {
 }
 
 export default function SignUp() {
+  const { errorMessage, setErrorMessage } = useContext(SiteContext);
   const classes = useStyles();
   const [firstname, setFirstName] = useState("");
   const [surname, setSurname] = useState("");
@@ -34,6 +37,15 @@ export default function SignUp() {
 
   const onUserSignUp = async () => {
     event.preventDefault();
+    if (
+      firstname.length < 3 ||
+      surname.length < 3 ||
+      email.length < 3 ||
+      password.length < 3
+    ) {
+      setErrorMessage("Please enter a value");
+      return;
+    }
     const user = {
       firstname,
       surname,
@@ -42,10 +54,10 @@ export default function SignUp() {
     };
     const response = await API.fetch("/register", user);
     console.log("user saved to db", response);
-    setFirstName('');
-    setSurname('');
-    setEmail('');
-    setPassword('');
+    setFirstName("");
+    setSurname("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -59,6 +71,7 @@ export default function SignUp() {
           Sign up
         </Typography>
         <form className={classes.form} noValidate onSubmit={onUserSignUp}>
+        {errorMessage !== "" && <Typography component="h6">{errorMessage} </Typography>}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
