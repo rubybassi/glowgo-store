@@ -15,8 +15,8 @@ const CartItems = () => {
             key={index}
             name={item.name}
             price={item.price.toFixed(2)}
-            image={item.imageProductUrl[0]}
-            id={item._id}
+            image={item.image}
+            id={item.id}
             removeItemFromCart={removeItemFromCart}
           />
         ))

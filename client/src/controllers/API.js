@@ -8,7 +8,7 @@ const API = {
       if (body) {
         fetchParams.method = "POST";
         fetchParams.body = JSON.stringify(body);
-        fetchParams.headers = { "Content-Type": "application/json" };
+        fetchParams.headers = { " Content-Type": "application/json" };
       }
       const response = await fetch(url, fetchParams);
       if (response.ok) {
@@ -20,26 +20,5 @@ const API = {
     }
   },
 };
+
 export default API;
-
-// ======== refactor to include error and status state
-// const API = {
-//   fetch: async (url, body) => {
-
-//     const fetchParams = {
-//       method: 'GET',
-//     };
-
-//     try {
-//       const response = await fetch(url);
-//       if (response.ok) {
-//         const payload = await response.json();
-//         return payload;
-//       }
-//     } catch (error) {
-//       throw error;
-//     }
-//   },
-// };
-
-// export default API;

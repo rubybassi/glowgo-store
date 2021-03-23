@@ -17,8 +17,8 @@ const ProductPage = ({
   brand,
   imageProductUrl,
   getBrandById,
-  item,
-  addtoCart
+  addtoCart,
+  _id
 }) => {
   const classes = useStyles();
 
@@ -68,7 +68,7 @@ const ProductPage = ({
               variant="outlined"
               size="medium"
               display="block"
-              onClick={() => addtoCart(item)}
+              onClick={() => addtoCart({name: name, id: _id, qty: 1, image: imageProductUrl[0], price: price})}
             >
               Add to Cart
             </Button>

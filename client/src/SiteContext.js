@@ -21,29 +21,15 @@ const SiteContextProvider = ({ children }) => {
 
   // user states
   const [userSearch, setUserSearch] = useState("");
-  const [shipping, setShipping] = useState([
-    {
-      firstname: "",
-      surname: "",
-      address1: "",
-      address2: "",
-      city: "",
-      postcode: "",
-    },
-  ]);
-  const [payment, setPayment] = useState([
-    {
-      number: "",
-      name: "",
-      expiry: "",
-      cvv: "",
-    },
-  ]);
+  const [shipping, setShipping] = useState({});
+  const [payment, setPayment] = useState({});
 
   const [isLoggedIn, setIsloggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userPayload, setUserPayload] = useState({});
+  const [order, setOrder] = useState([]);
+  //const [orders, setOrders] = useState([]);
 
   //============================USER AUTH AND LOGIN STATUS ======================
   // posts user sign in then sets state and local storage if successfull
@@ -201,6 +187,45 @@ const SiteContextProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify({ cartItems }));
   }, [cartItems]);
 
+  //============================CHECKOUT ACTIONS=======================
+  // on checkout shipping input
+  const onShipping = (e) => {
+    const value = e.target.value;
+    setShipping({
+      ...shipping,
+      [e.target.name]: value,
+    });
+  };
+
+  // on checkout payment input
+  const onPayment = (e) => {
+    const value = e.target.value;
+    setPayment({
+      ...payment,
+      [e.target.name]: value,
+    });
+  };
+
+  // on checkout submit
+  const onCheckoutSubmit = async () => {
+    //e.preventDefault();
+    // do some form input error checking
+    const newOrder = {
+      shipping,
+      payment,
+      cartItems,
+    };
+    const token = userPayload.token;
+    // get token from storage and send in header as bearer
+    const response = await API.fetch("/user/checkout", newOrder, token);
+    if (response?.success) {
+      setOrder(response.payload);
+    } else {
+      setErrorMessage("There has been an error submitting your order.");
+    }
+    console.log("order is", newOrder);
+  };
+
   //============================USER SEARCH ACTIONS=======================
   // gets and sets user input from search bar
   const handleUserSearchInput = (e) => {
@@ -233,8 +258,6 @@ const SiteContextProvider = ({ children }) => {
         removeItemFromCart,
         shipping,
         payment,
-        setShipping,
-        setPayment,
         email,
         password,
         onUserSignIn,
@@ -245,6 +268,9 @@ const SiteContextProvider = ({ children }) => {
         userPayload,
         setErrorMessage,
         onLogOut,
+        onCheckoutSubmit,
+        onShipping,
+        onPayment,
       }}
     >
       {children}

@@ -6,7 +6,7 @@ import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 export default function AddressForm() {
-  const { shipping, setShipping } = useContext(SiteContext);
+  const { shipping, onShipping } = useContext(SiteContext);
 
   return (
     <React.Fragment>
@@ -18,24 +18,24 @@ export default function AddressForm() {
           <TextField
             required
             id="firstName"
-            name="firstName"
+            name="firstname"
             label="First name"
             fullWidth
             autoComplete="given-name"
-            value={shipping.firstname}
-            onChange={(e) => setShipping({...shipping, firstname: e.target.value})}
+            value={shipping.firstname || ""}
+            onChange={onShipping}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
             id="lastName"
-            name="lastName"
+            name="surname"
             label="Last name"
             fullWidth
             autoComplete="family-name"
-            value={shipping.surname}
-            onChange={(e) => setShipping({...shipping, surname: e.target.value})}
+            value={shipping.surname || ""}
+            onChange={onShipping}
           />
         </Grid>
         <Grid item xs={12}>
@@ -46,8 +46,8 @@ export default function AddressForm() {
             label="Address line 1"
             fullWidth
             autoComplete="shipping address-line1"
-            value={shipping.address1}
-            onChange={(e) => setShipping({...shipping, address1: e.target.value})}
+            value={shipping.address1 || ""}
+            onChange={onShipping}
           />
         </Grid>
         <Grid item xs={12}>
@@ -57,8 +57,8 @@ export default function AddressForm() {
             label="Address line 2"
             fullWidth
             autoComplete="shipping address-line2"
-            value={shipping.address2}
-            onChange={(e) => setShipping({...shipping, address2: e.target.value})}
+            value={shipping.address2 || ""}
+            onChange={onShipping}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -69,8 +69,8 @@ export default function AddressForm() {
             label="City"
             fullWidth
             autoComplete="shipping address-level2"
-            value={shipping.city}
-            onChange={(e) => setShipping({...shipping, city: e.target.value})}
+            value={shipping.city || ""}
+            onChange={onShipping}
 
           />
         </Grid>
@@ -81,12 +81,12 @@ export default function AddressForm() {
           <TextField
             required
             id="zip"
-            name="zip"
+            name="postcode"
             label="Postal code"
             fullWidth
             autoComplete="shipping postal-code"
-            value={shipping.postcode}
-            onChange={(e) => setShipping({...shipping, postcode: e.target.value})}
+            value={shipping.postcode || ""}
+            onChange={onShipping}
           />
         </Grid>
       </Grid>

@@ -12,7 +12,7 @@ const Product = ({product, isLoading}) => {
       {isLoading ? (
         <LinearIndeterminate />
       ) : (
-        <ProductPage {...product} getBrandById={getBrandById} item={product} addtoCart={addtoCart}/>
+        <ProductPage {...product} getBrandById={getBrandById} addtoCart={addtoCart}/>
       )}
     </>
   );

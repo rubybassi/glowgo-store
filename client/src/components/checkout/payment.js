@@ -6,13 +6,7 @@ import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 export default function PaymentForm() {
-  const { payment, setPayment} = useContext(SiteContext);
-  // const [payment, setPayment] = useState({
-  //   number: "",
-  //   name: "",
-  //   expiry: "",
-  //   cvv: "",
-  // });
+  const { payment, onPayment} = useContext(SiteContext);
 
   return (
     <React.Fragment>
@@ -24,33 +18,36 @@ export default function PaymentForm() {
           <TextField
             required
             id="cardName"
+            name="name"
             label="Name on card"
             fullWidth
             autoComplete="cc-name"
-            value={payment.name}
-            onChange={(e) => setPayment({ ...payment, name: e.target.value })}
+            value={payment.name || ""}
+            onChange={onPayment}
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
             required
             id="cardNumber"
+            name="number"
             label="Card number"
             fullWidth
             autoComplete="cc-number"
-            value={payment.number}
-            onChange={(e) => setPayment({ ...payment, number: e.target.value })}
+            value={payment.number || ""}
+            onChange={onPayment}
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
             required
             id="expDate"
+            name="expiry"
             label="Expiry date"
             fullWidth
             autoComplete="cc-exp"
-            value={payment.expiry}
-            onChange={(e) => setPayment({ ...payment, expiry: e.target.value })}
+            value={payment.expiry || ""}
+            onChange={onPayment}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -58,11 +55,12 @@ export default function PaymentForm() {
             required
             id="cvv"
             label="CVV"
+            name="cvv"
             helperText="Last three digits on signature strip"
             fullWidth
             autoComplete="cc-csc"
-            value={payment.cvv}
-            onChange={(e) => setPayment({ ...payment, cvv: e.target.value })}
+            value={payment.cvv || ""}
+            onChange={onPayment}
           />
         </Grid>
       </Grid>

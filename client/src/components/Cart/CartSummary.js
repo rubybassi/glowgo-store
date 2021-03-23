@@ -51,30 +51,31 @@ const CartSummary = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          
           {isLoggedIn && (
-          <Button
-            className={classes.checkoutButton}
-            variant="contained"
-            size="medium"
-            display="block"
-            color="primary"
-          >
-            <HttpsIcon></HttpsIcon>Secure Checkout
-          </Button>
+            <Link to={"/user/checkout"}>
+              <Button
+                className={classes.checkoutButton}
+                variant="contained"
+                size="medium"
+                display="block"
+                color="primary"
+              >
+                <HttpsIcon></HttpsIcon>Secure Checkout
+              </Button>
+            </Link>
           )}
 
           {!isLoggedIn && (
-          <Link to={"/login"}>
-          <Button
-            className={classes.button}
-            variant="outlined"
-            size="medium"
-            display="block"
-          >
-            Login
-          </Button>
-        </Link>
+            <Link to={"/login"}>
+              <Button
+                className={classes.button}
+                variant="outlined"
+                size="medium"
+                display="block"
+              >
+                Login
+              </Button>
+            </Link>
           )}
 
           <Link to={"/"}>

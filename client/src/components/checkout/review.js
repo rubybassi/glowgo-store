@@ -39,8 +39,8 @@ export default function Review() {
         Order summary
       </Typography>
       <List disablePadding>
-        {cartItems.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
+        {cartItems.map((product, index) => (
+          <ListItem className={classes.listItem} key={index}>
             <ListItemText primary={product.name} secondary={product.desc} />
             <Typography variant="body2">£{product.price.toFixed(2)}</Typography>
           </ListItem>
