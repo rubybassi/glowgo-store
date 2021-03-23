@@ -6,7 +6,9 @@ import { useParams } from "react-router-dom";
 
 const Category = () => {
   const { id } = useParams();
-  const { getCategoryById, productsByCategory, isLoading } = useContext(SiteContext);
+  const { getCategoryById, productsByCategory, isLoading } = useContext(
+    SiteContext
+  );
   useEffect(() => {
     getCategoryById(id);
     console.log("product in cateogry useeffect", id);
@@ -15,7 +17,10 @@ const Category = () => {
     <div>
       <Container>
         <h4>Category</h4>
-        <Categories productsByCategory={productsByCategory} isLoading={isLoading}/>
+        <Categories
+          productsByCategory={productsByCategory}
+          isLoading={isLoading}
+        />
       </Container>
     </div>
   );

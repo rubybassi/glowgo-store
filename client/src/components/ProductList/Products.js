@@ -10,7 +10,7 @@ const Products = ({ isLoading, products }) => {
         <LinearIndeterminate />
       ) : (
         <Grid container spacing={4}>
-          {products.map((item) => (
+          {products?.map((item) => (
             <Grid item key={item._id} xs={12} sm={6} md={4}>
               <ProductCard item={item} />
             </Grid>

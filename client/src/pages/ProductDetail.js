@@ -11,12 +11,11 @@ const ProductDetail = () => {
     getProductById(id);
     console.log("product in product useeffect", id);
   }, []);
-
   return (
     <div>
       <Container>
         <h4>Product</h4>
-        <Product product={productById} isLoading={isLoading}/>
+        <Product product={productById} isLoading={isLoading} />
       </Container>
     </div>
   );

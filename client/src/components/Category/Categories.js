@@ -4,10 +4,11 @@ import ProductCard from "../ProductList/ProductCard";
 import FeaturedHeader from "../HeaderText/FeaturedHeader";
 import LinearIndeterminate from "../Loading/LoadingBar";
 
-const Categories = ({productsByCategory, isLoading}) => {
-  
+const Categories = ({ productsByCategory, isLoading }) => {
   return (
     <div>
+      {isLoading && <LinearIndeterminate />}
+
       {!isLoading && (
         <FeaturedHeader
           name={productsByCategory.name}
@@ -15,17 +16,14 @@ const Categories = ({productsByCategory, isLoading}) => {
           image={productsByCategory.image}
         />
       )}
-      
+
       <Grid container spacing={4}>
-        {isLoading ? (
-          <LinearIndeterminate />
-        ) : (
+        {!isLoading &&
           productsByCategory.products?.map((item) => (
             <Grid item key={item._id} xs={12} sm={6} md={4}>
               <ProductCard item={item} />
             </Grid>
-          ))
-        )}
+          ))}
       </Grid>
     </div>
   );

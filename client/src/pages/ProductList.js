@@ -4,13 +4,11 @@ import Container from "@material-ui/core/Container";
 import SiteContext from "../SiteContext";
 
 const ProductList = () => {
-  
   const { getAllProducts, isLoading, products } = useContext(SiteContext);
   useEffect(() => {
     getAllProducts();
     console.log("product all in product list useeffect");
   }, []);
-  
   return (
     <div>
       <Container>

@@ -44,22 +44,23 @@ const SiteContextProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userPayload, setUserPayload] = useState({});
-  
+
   //============================USER AUTH AND LOGIN STATUS ======================
   // posts user sign in then sets state and local storage if successfull
   const onUserSignIn = async (e) => {
     e.preventDefault();
-    const newUser = {email,password};
+    const newUser = { email, password };
     if (email.length < 3 || password.length < 3) {
-      setErrorMessage("Please enter a value");  
+      setErrorMessage("Please enter a value");
       return;
     }
     const response = await API.fetch("/login", newUser);
     if (response?.success && response?.payload.token) {
       setUserPayload(response.payload);
       setIsloggedIn(true);
-      localStorage.setItem('user', JSON.stringify(response.payload));
-      setErrorMessage('');
+      localStorage.setItem("user", JSON.stringify(response.payload));
+      localStorage.setItem("loggedStatus", JSON.stringify({ status: true }));
+      setErrorMessage("");
     } else {
       setIsloggedIn(false);
       setErrorMessage(
@@ -70,11 +71,18 @@ const SiteContextProvider = ({ children }) => {
     setPassword("");
   };
 
-  // pushes logged userstate to local storage
+  // gets and sets logged userstate from local storage
   useEffect(() => {
     const getUserfromstore = JSON.parse(localStorage.getItem("user"));
-    if (!getUserfromstore) return null;
+    if (getUserfromstore === "" || getUserfromstore === null) {
+      return null;
+    }
     setUserPayload(getUserfromstore);
+    const getUserStatus = JSON.parse(localStorage.getItem("loggedStatus"));
+    if (getUserStatus === "" || getUserStatus === null) {
+      return null;
+    }
+    setIsloggedIn(getUserStatus);
   }, []);
 
   // on passsword submit
@@ -90,7 +98,7 @@ const SiteContextProvider = ({ children }) => {
   // logs out user on request and clears user toekn and payload
   const onLogOut = () => {
     setIsloggedIn(false);
-    localStorage.clear("user");
+    localStorage.clear();
   };
 
   //============================INITIAL PRODUCT LOAD ACTIONS=======================
@@ -236,7 +244,7 @@ const SiteContextProvider = ({ children }) => {
         errorMessage,
         userPayload,
         setErrorMessage,
-        onLogOut
+        onLogOut,
       }}
     >
       {children}
