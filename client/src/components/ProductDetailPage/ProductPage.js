@@ -28,7 +28,7 @@ const ProductPage = ({
         <Grid item xs={12} sm={6}>
           <CardMedia
             className={classes.media}
-            image={imageProductUrl[0]}
+            image={imageProductUrl && imageProductUrl[0] || null}
             title={name}
           />
         </Grid>
@@ -45,22 +45,22 @@ const ProductPage = ({
           </Grid>
           <Grid item xs={12} sm={6}>
             <Button
-              onClick={() => getBrandById(brand._id)}
+              onClick={() => getBrandById(brand?._id)}
               color="primary"
               className={classes.btn}
             >
               <Typography variant="overline" display="block">
                 <Link
-                  to={`/product/brand/${brand._id}`}
+                  to={`/product/brand/${brand?._id}`}
                   className={classes.link}
                 >
-                  {brand.name}
+                  {brand?.name}
                 </Link>
               </Typography>
             </Button>
           </Grid>
           <Grid item>
-            <Typography variant="h5"> £{price.toFixed(2)}</Typography>
+            <Typography variant="h5"> £{price?.toFixed(2)}</Typography>
           </Grid>
           <Grid item>
             <Button

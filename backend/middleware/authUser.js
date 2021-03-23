@@ -1,9 +1,10 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
-// gets token from header and runs a jwt verify
+// gets token from header and runs a jwt verify add try catch
 const authUser = (req, res, next) => {
-  const token = req.headers["authorisation"];
+  const token = req.header('Authorization');
+  //const token = req.headers["authorisation"];
   //const token = tokenHeader && tokenHeader.split(" ")[1];
   //console.log(token);
   if (token == null) return res.sendStatus(401);

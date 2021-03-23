@@ -10,6 +10,7 @@ const API = {
         fetchParams.body = JSON.stringify(body);
         fetchParams.headers = {
           "Content-Type": "application/json",
+          // "Authorization": "Bearer " + token,
           "Authorization": token,
         };
       }
