@@ -45,6 +45,7 @@ const SiteContextProvider = ({ children }) => {
   const [password, setPassword] = useState("");
   const [userPayload, setUserPayload] = useState({});
   
+  //============================USER AUTH AND LOGIN STATUS ======================
   // posts user sign in then sets state and local storage if successfull
   const onUserSignIn = async (e) => {
     e.preventDefault();
@@ -82,7 +83,7 @@ const SiteContextProvider = ({ children }) => {
     setEmail(e.target.value);
   };
 
-  //============================INITIAL LOAD ACTIONS=======================
+  //============================INITIAL PRODUCT LOAD ACTIONS=======================
   // fetches all bestselling products
   useEffect(() => {
     const fetchAllBestsellers = async () => {

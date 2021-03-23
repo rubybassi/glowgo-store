@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const CartSummary = () => {
   const classes = useStyles();
-  const { cartItems } = useContext(SiteContext);
+  const { cartItems, isLoggedIn } = useContext(SiteContext);
 
   const GetTotalsum = () => {
     const sum = cartItems?.reduce(
@@ -51,6 +51,8 @@ const CartSummary = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
+          
+          {isLoggedIn ? (
           <Button
             className={classes.checkoutButton}
             variant="contained"
@@ -60,6 +62,19 @@ const CartSummary = () => {
           >
             <HttpsIcon></HttpsIcon>Secure Checkout
           </Button>
+          ) : 
+          <Link to={"/login"}>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            size="medium"
+            display="block"
+          >
+            Login
+          </Button>
+        </Link>
+          }
+
           <Link to={"/"}>
             <Button
               className={classes.button}
