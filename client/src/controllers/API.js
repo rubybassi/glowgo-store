@@ -1,6 +1,6 @@
 // ======== refactor to include error and status state
 const API = {
-  fetch: async (url, body) => {
+  fetch: async (url, body, token) => {
     try {
       const fetchParams = {
         method: "GET",
@@ -8,7 +8,10 @@ const API = {
       if (body) {
         fetchParams.method = "POST";
         fetchParams.body = JSON.stringify(body);
-        fetchParams.headers = { " Content-Type": "application/json" };
+        fetchParams.headers = {
+          "Content-Type": "application/json",
+          "Authorization": token,
+        };
       }
       const response = await fetch(url, fetchParams);
       if (response.ok) {

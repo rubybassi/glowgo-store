@@ -214,6 +214,8 @@ const SiteContextProvider = ({ children }) => {
       shipping,
       payment,
       cartItems,
+      userID: userPayload.user.id,
+      userEmail: userPayload.user.email,
     };
     const token = userPayload.token;
     // get token from storage and send in header as bearer
