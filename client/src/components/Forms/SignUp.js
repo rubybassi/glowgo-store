@@ -13,6 +13,7 @@ import API from "../../controllers/API";
 import useStyles from "./styles";
 import { useContext } from "react";
 import SiteContext from "../../SiteContext";
+import { Route, Redirect, useHistory } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -28,6 +29,7 @@ function Copyright() {
 }
 
 export default function SignUp() {
+  const history = useHistory();
   const { errorMessage, setErrorMessage } = useContext(SiteContext);
   const classes = useStyles();
   const [firstname, setFirstName] = useState("");
@@ -58,7 +60,15 @@ export default function SignUp() {
     setSurname("");
     setEmail("");
     setPassword("");
-  };
+    if (response?.success) {
+      history.push("/login");
+      //<Redirect to='/login'/>
+    } else {
+      const errorMessage = response?.payload?.message;
+      console.log(errorMessage);
+      setErrorMessage(errorMessage);
+    }
+    };
 
   return (
     <Container component="main" maxWidth="xs">

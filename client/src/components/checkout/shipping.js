@@ -71,7 +71,6 @@ export default function AddressForm() {
             autoComplete="shipping address-level2"
             value={shipping.city || ""}
             onChange={onShipping}
-
           />
         </Grid>
         <Grid item xs={12} sm={6}>

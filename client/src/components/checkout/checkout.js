@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, {useContext} from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
 import Stepper from "@material-ui/core/Stepper";
@@ -8,11 +7,10 @@ import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
-import AddressForm from "./shipping";
-import PaymentForm from "./payment";
-import Review from "./review";
+import AddressForm from "./Shipping";
+import PaymentForm from "./Payment";
+import Review from "./Review";
 import useStyles from "./styles";
-import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 // replace order number with db response
@@ -31,7 +29,6 @@ function Copyright() {
 }
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
-
 function getStepContent(step) {
   switch (step) {
     case 0:
@@ -53,7 +50,6 @@ export default function Checkout() {
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
-
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };

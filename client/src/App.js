@@ -13,7 +13,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Order from "./pages/Order";
 import Container from '@material-ui/core/Container';
-import { AuthenticatedRoute } from "./components/AuthRoute";
+import { AuthenticatedRoute } from "./hooks/AuthRoute";
 
 function App() {
   return (

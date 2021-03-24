@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 export default function PaymentForm() {

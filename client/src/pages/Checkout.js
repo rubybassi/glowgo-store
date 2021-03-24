@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import Checkout from "../components/checkout/checkout";
+import Checkout from "../components/Checkout/Checkout";
 
 const CheckoutPage = () => {
   return (

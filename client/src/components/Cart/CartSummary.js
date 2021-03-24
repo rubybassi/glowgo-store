@@ -5,19 +5,12 @@ import { Typography, Grid, Button } from "@material-ui/core";
 import HttpsIcon from "@material-ui/icons/Https";
 import useStyles from "./styles";
 import { Link } from "react-router-dom";
+import Helpers from "../../controllers/Helpers";
 
 const CartSummary = () => {
   const classes = useStyles();
   const { cartItems, isLoggedIn } = useContext(SiteContext);
-
-  const GetTotalsum = () => {
-    const sum = cartItems?.reduce(
-      (amount, cartItems) => cartItems.price + amount,
-      0
-    );
-    const roundedSum = Math.round(sum * 100) / 100;
-    return roundedSum.toFixed(2);
-  };
+  const sum = Helpers.GetTotalSum(cartItems);
 
   return (
     <>
@@ -47,7 +40,7 @@ const CartSummary = () => {
         </Grid>
         <Grid item xs={6} className={classes.typography}>
           <Typography variant="body1" color="textPrimary" align="right">
-            £<GetTotalsum />
+            £{sum}
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -64,7 +57,6 @@ const CartSummary = () => {
               </Button>
             </Link>
           )}
-
           {!isLoggedIn && (
             <Link to={"/login"}>
               <Button

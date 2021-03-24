@@ -1,9 +1,9 @@
 import { useState, createContext, useEffect } from "react";
 const SiteContext = createContext();
 import API from "./controllers/API";
+import Helpers from "./controllers/Helpers";
 
 const SiteContextProvider = ({ children }) => {
-  // product states
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -14,22 +14,17 @@ const SiteContextProvider = ({ children }) => {
   const [newarrivals, setNewarrivals] = useState([]);
   const getCart = () => JSON.parse(localStorage.getItem("cart"));
   const [cartItems, setCartItems] = useState(getCart()?.cartItems || []);
-
-  // status states
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-
-  // user states
   const [userSearch, setUserSearch] = useState("");
   const [shipping, setShipping] = useState({});
   const [payment, setPayment] = useState({});
-
   const [isLoggedIn, setIsloggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userPayload, setUserPayload] = useState({});
   const [order, setOrder] = useState([]);
-  //const [orders, setOrders] = useState([]);
+  const [orderHistory, setorderHistory] = useState([]);
 
   //============================USER AUTH AND LOGIN STATUS ======================
   // posts user sign in then sets state and local storage if successfull
@@ -56,7 +51,6 @@ const SiteContextProvider = ({ children }) => {
     setEmail("");
     setPassword("");
   };
-
   // gets and sets logged userstate from local storage
   useEffect(() => {
     const getUserfromstore = JSON.parse(localStorage.getItem("user"));
@@ -70,23 +64,19 @@ const SiteContextProvider = ({ children }) => {
     }
     setIsloggedIn(getUserStatus);
   }, []);
-
   // on passsword submit
   const onPassword = (e) => {
     setPassword(e.target.value);
   };
-
   // on email submit
   const onEmail = (e) => {
     setEmail(e.target.value);
   };
-
   // logs out user on request and clears user toekn and payload
   const onLogOut = () => {
     setIsloggedIn(false);
     localStorage.clear();
   };
-
   //============================INITIAL PRODUCT LOAD ACTIONS=======================
   // fetches all bestselling products
   useEffect(() => {
@@ -103,7 +93,6 @@ const SiteContextProvider = ({ children }) => {
     };
     fetchAllBestsellers();
   }, []);
-
   // fetches all bestselling products
   useEffect(() => {
     const fetchAllNewArrivals = async () => {
@@ -112,7 +101,6 @@ const SiteContextProvider = ({ children }) => {
     };
     fetchAllNewArrivals();
   }, []);
-
   // fetches all categories
   useEffect(() => {
     const fetchAllCategories = async () => {
@@ -121,7 +109,6 @@ const SiteContextProvider = ({ children }) => {
     };
     fetchAllCategories();
   }, []);
-
   // fetches all brands
   useEffect(() => {
     const fetchAllBrands = async () => {
@@ -130,7 +117,6 @@ const SiteContextProvider = ({ children }) => {
     };
     fetchAllBrands();
   }, []);
-
   //============================USER PRODUCT SELECTION ACTIONS=======================
   // get products by category selection
   const getCategoryById = async (id) => {
@@ -138,42 +124,33 @@ const SiteContextProvider = ({ children }) => {
     const payload = await API.fetch(`/product/category/${id}`);
     setProductsByCategory(payload);
     setIsLoading(false);
-    console.log("fetching all cat products", productsByCategory);
   };
-
   // get products by brand selection
   const getBrandById = async (id) => {
     setIsLoading(true);
     const payload = await API.fetch(`/product/brand/${id}`);
     setProductsByBrand(payload);
     setIsLoading(false);
-    console.log("fetching all brand products", productsByBrand);
   };
-
   // get products by id on product list selection
   const getProductById = async (id) => {
     setIsLoading(true);
     const payload = await API.fetch(`/product/${id}`);
     setProductById(payload);
     setIsLoading(false);
-    console.log("fetching product by id payload", payload);
   };
-
   // get all products on all products drawer selection
   const getAllProducts = async () => {
     setIsLoading(true);
     const payload = await API.fetch("/product/all");
     setProducts(payload);
     setIsLoading(false);
-    console.log("fetching all products", payload);
   };
   //============================CART ACTIONS=======================
   // updates cart state from user add to cart event
   const addtoCart = (item) => {
     setCartItems((prev) => [...prev, item]);
-    console.log("items in cart", cartItems);
   };
-
   // updates cart state when user removes item from cart by index
   const removeItemFromCart = (id) => {
     const index = cartItems.findIndex((item) => item._id === id);
@@ -181,12 +158,10 @@ const SiteContextProvider = ({ children }) => {
     newCart.splice(index, 1);
     setCartItems(newCart);
   };
-
   // pushes cart items to local storage when cart state changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify({ cartItems }));
   }, [cartItems]);
-
   //============================CHECKOUT ACTIONS=======================
   // on checkout shipping input
   const onShipping = (e) => {
@@ -196,7 +171,6 @@ const SiteContextProvider = ({ children }) => {
       [e.target.name]: value,
     });
   };
-
   // on checkout payment input
   const onPayment = (e) => {
     const value = e.target.value;
@@ -205,20 +179,17 @@ const SiteContextProvider = ({ children }) => {
       [e.target.name]: value,
     });
   };
-
   // on checkout submit
   const onCheckoutSubmit = async () => {
-    //e.preventDefault();
     // do some form input error checking
     const newOrder = {
       shipping,
       payment,
       cartItems,
       userID: userPayload.user.id,
-      userEmail: userPayload.user.email,
+      orderTotal: Helpers.GetTotalSum(cartItems),
     };
     const token = userPayload.token;
-    // get token from storage and send in header as bearer
     const response = await API.fetch("/user/checkout", newOrder, token);
     if (response?.success) {
       setOrder(response.payload);
@@ -227,11 +198,9 @@ const SiteContextProvider = ({ children }) => {
     }
     console.log("order is", newOrder);
   };
-
   //============================USER SEARCH ACTIONS=======================
   // gets and sets user input from search bar
   const handleUserSearchInput = (e) => {
-    console.log("user value", e.target.value);
     const searched = e.target.value;
     setUserSearch(searched);
   };
@@ -273,6 +242,7 @@ const SiteContextProvider = ({ children }) => {
         onCheckoutSubmit,
         onShipping,
         onPayment,
+        orderHistory,
       }}
     >
       {children}
