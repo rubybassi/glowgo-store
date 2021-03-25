@@ -49,9 +49,12 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     // validate user
-    const authUser = await signinAuthSchema.validateAsync(req.body);
+    const { error, value } = await signinAuthSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ message: error.message})
+    }
     // checks if user email exists in db
-    const queryUser = await User.findOne({ email: authUser.email });
+    const queryUser = await User.findOne({ email: value.email });
     if (!queryUser) {
       return res.status(409).json({
         success: false,
@@ -59,7 +62,7 @@ router.post("/login", async (req, res) => {
       });
     }
     // compare password to validate user sigining in vs user stored in db
-    const match = await bcrypt.compare(authUser.password, queryUser.password);
+    const match = await bcrypt.compare(value.password, queryUser.password);
     if (!match) {
       return res.status(401).json({
         success: false,
