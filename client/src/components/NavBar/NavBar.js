@@ -11,6 +11,7 @@ import {
   Menu,
   Drawer,
   Typography,
+  ListItem,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
@@ -30,6 +31,7 @@ export default function NavBar() {
     userPayload,
     onLogOut,
     isLoggedIn,
+    getOrders,
   } = useContext(SiteContext);
 
   // @material ui styling props and functions
@@ -90,8 +92,13 @@ export default function NavBar() {
       )}
       {isLoggedIn && (
         <MenuItem onClick={handleMenuClose}>
-          <Link to={"/user/order"} className={classes.link}>
-            <p>My Account</p>
+          <Link
+            to={`/user/order/${userPayload.user.id}`}
+            className={classes.link}
+          >
+            <ListItem button onClick={() => getOrders(userPayload.user.id)}>
+              <p>My Account</p>
+            </ListItem>
           </Link>
         </MenuItem>
       )}

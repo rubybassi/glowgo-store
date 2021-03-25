@@ -35,6 +35,8 @@ const OrderSchema = new Schema(
         },
         price: { type: Number },
         qty: { type: Number },
+        image: {type: String},
+        name: {type: String},
       },
     ],
   },

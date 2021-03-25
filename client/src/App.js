@@ -29,7 +29,7 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/login" component={Login} />
-          <AuthenticatedRoute exact path="/user/order" component={Order} />
+          <AuthenticatedRoute exact path="/user/order/:id" component={Order} />
           <AuthenticatedRoute exact path="/user/checkout" component={Checkout} />
         </Switch>
         </Container>

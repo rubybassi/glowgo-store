@@ -3,7 +3,7 @@ import OrdersCard from "./OrdersCard";
 import { Typography, Grid, Divider } from "@material-ui/core";
 import useStyles from "./styles";
 
-const Orders = ({ name }) => {
+const Orders = ({ name, orderHistory }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -22,7 +22,9 @@ const Orders = ({ name }) => {
           </Typography>
           <Typography variant="body2" gutterBottom color="textPrimary">
             Here's a snapshot of your recent account activity. Select a link
-            below to view or edit information.
+            below to view or edit information. {orderHistory.map( order => {
+              <h2>Order is{order.userID}</h2>
+            })}
           </Typography>
           <Divider className={classes.divider} />
         </Grid>

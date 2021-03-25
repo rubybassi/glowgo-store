@@ -24,7 +24,7 @@ const SiteContextProvider = ({ children }) => {
   const [password, setPassword] = useState("");
   const [userPayload, setUserPayload] = useState({});
   const [order, setOrder] = useState([]);
-  const [orderHistory, setorderHistory] = useState([]);
+  const [orderHistory, setOrderHistory] = useState([]);
 
   //============================USER AUTH AND LOGIN STATUS ======================
   // posts user sign in then sets state and local storage if successfull
@@ -181,6 +181,7 @@ const SiteContextProvider = ({ children }) => {
   };
   // on checkout submit
   const onCheckoutSubmit = async () => {
+    setIsLoading(true);
     // do some form input error checking
     const newOrder = {
       shipping,
@@ -188,6 +189,7 @@ const SiteContextProvider = ({ children }) => {
       cartItems,
       userID: userPayload.user.id,
       orderTotal: Helpers.GetTotalSum(cartItems),
+      shippingFee: "Free",
     };
     const token = userPayload.token;
     const response = await API.fetch("/user/checkout", newOrder, token);
@@ -197,7 +199,24 @@ const SiteContextProvider = ({ children }) => {
       setErrorMessage("There has been an error submitting your order.");
     }
     console.log("order is", newOrder);
+    setIsLoading(false);
   };
+  //============================USER HISTORY ACTIONS=======================
+  // gets user's order history
+  const getOrders = async (id) => {
+    setIsLoading(true);
+    // do some form input error checking
+    const token = userPayload.token;
+    const response = await API.fetchGetToken(`/user/order/${id}`, token);
+    if (response?.success) {
+      setOrderHistory(response.payload);
+    } else {
+      setErrorMessage("There has been an error fetching your orders.");
+    }
+    setIsLoading(false);
+    console.log("cust orders payload,", response);
+  };
+
   //============================USER SEARCH ACTIONS=======================
   // gets and sets user input from search bar
   const handleUserSearchInput = (e) => {
@@ -243,6 +262,7 @@ const SiteContextProvider = ({ children }) => {
         onShipping,
         onPayment,
         orderHistory,
+        getOrders,
       }}
     >
       {children}
