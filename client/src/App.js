@@ -10,10 +10,10 @@ import Category from "./pages/Category";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
 import Order from "./pages/Order";
 import Container from '@material-ui/core/Container';
 import { AuthenticatedRoute } from "./hooks/AuthRoute";
+import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/login" component={Login} />
           <AuthenticatedRoute exact path="/user/order/:id" component={Order} />
-          <AuthenticatedRoute exact path="/user/checkout" component={Checkout} />
+          <AuthenticatedRoute exact path="/user/checkout" component={CheckoutPage} />
         </Switch>
         </Container>
         <Footer />
