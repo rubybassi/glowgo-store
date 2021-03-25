@@ -99,6 +99,7 @@ router.post("/login", async (req, res) => {
     res.status(403).json({
       error: "Your request could not be processed. Please try again.",
     });
+    console.log('error', err)
   }
 });
 
