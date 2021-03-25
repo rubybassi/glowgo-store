@@ -8,5 +8,9 @@
 }
 
 .slick-slide {
-  height: 500px;
+  height: 600px;
+}
+
+.slick-initialized .slick-slide {
+  height: 600px;
 }

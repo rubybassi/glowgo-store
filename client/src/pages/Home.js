@@ -4,6 +4,7 @@ import SiteContext from "../SiteContext";
 import FeaturedCarousel from "../components/Carousels/FeaturedCarousel";
 import HomeCarousel from "../components/Carousels/HomeCarousel";
 import Container from "@material-ui/core/Container";
+import CatergoryBanners from "../components/Category/CategoryBanner";
 
 const Home = () => {
   const { bestsellers } = useContext(SiteContext);
@@ -12,7 +13,8 @@ const Home = () => {
       <Container>
         <h4>Home</h4>
         <HomeCarousel />
-        <FeaturedCarousel items={bestsellers} header={"BestSellers"}/>
+        <CatergoryBanners/>
+        <FeaturedCarousel items={bestsellers} header={"BestSellers"} />
       </Container>
     </div>
   );

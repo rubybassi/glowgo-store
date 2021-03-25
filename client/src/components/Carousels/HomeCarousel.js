@@ -7,30 +7,24 @@ import "./HomeCarousel.css";
 const HomeCarousel = () => {
 
     const settings = {
-      dots: true,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 3000,
-      pauseOnHover: true,
+      initialSlide: 0,
   };
 
   return (
     <div>
     <Slider {...settings}>
       <div>
-        <img src="http://placekitten.com/g/400/200" />
+        <img src="https://res.cloudinary.com/degjxwgbj/image/upload/v1616705869/glowgo/banners/theordinary-slide_xfkwpx.png" />
       </div>
       <div>
-        <img src="http://placekitten.com/g/400/200" />
+        <img src="https://res.cloudinary.com/degjxwgbj/image/upload/v1616707312/glowgo/banners/drunk-elephant-slider_u0mzpl.png" />
       </div>
       <div>
-        <img src="http://placekitten.com/g/400/200" />
-      </div>
-      <div>
-        <img src="http://placekitten.com/g/400/200" />
+        <img src="https://res.cloudinary.com/degjxwgbj/image/upload/v1616708903/glowgo/banners/moisturisers-slider_hqqko1.png" />
       </div>
     </Slider>
   </div>
