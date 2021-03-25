@@ -25,12 +25,12 @@ const CartSummary = () => {
         </Grid>
         <Grid item xs={6}>
           <Typography variant="body1" color="textPrimary">
-            Free Shipping
+            Shipping
           </Typography>
         </Grid>
         <Grid item xs={6} className={classes.typography}>
           <Typography variant="body1" color="textPrimary">
-            £{0.0}
+            Free
           </Typography>
         </Grid>
         <Grid item xs={6}>

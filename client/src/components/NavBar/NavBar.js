@@ -202,7 +202,7 @@ export default function NavBar() {
           <div className={classes.sectionDesktop}>
             {isLoggedIn && (
               <Typography variant="h6" className={classes.name}>
-                Hello {userPayload.user?.firstname}
+                Hi {userPayload.user?.firstname}!
               </Typography>
             )}
 
