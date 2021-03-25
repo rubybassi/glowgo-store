@@ -96,9 +96,9 @@ export default function NavBar() {
             to={`/user/order/${userPayload.user.id}`}
             className={classes.link}
           >
-            <ListItem button onClick={() => getOrders(userPayload.user.id)}>
+            {/* <ListItem button onClick={() => getOrders(userPayload.user.id)}> */}
               <p>My Account</p>
-            </ListItem>
+            {/* </ListItem> */}
           </Link>
         </MenuItem>
       )}

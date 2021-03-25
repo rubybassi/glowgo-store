@@ -29,7 +29,7 @@ const OrderSchema = new Schema(
     },
     cartItems: [
       {
-        productID: {
+        _id: {
           type: Schema.Types.ObjectId,
           ref: "Product",
         },

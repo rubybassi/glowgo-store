@@ -21,15 +21,15 @@ const Orders = ({ name, orderHistory }) => {
             Hello, {name}!
           </Typography>
           <Typography variant="body2" gutterBottom color="textPrimary">
-            Here's a snapshot of your recent account activity. Select a link
-            below to view or edit information. {orderHistory.map( order => {
-              <h2>Order is{order.userID}</h2>
-            })}
+            Here's a snapshot of your recent account activity.
           </Typography>
           <Divider className={classes.divider} />
         </Grid>
         <Grid item sm={12}>
-          <OrdersCard />
+          {orderHistory &&
+            orderHistory.map((order) => (
+              <OrdersCard key={order._id} order={order} />
+            ))}
         </Grid>
       </Grid>
     </div>

@@ -22,11 +22,10 @@ router.post("/checkout", authUser, async (req, res) => {
 router.get("/order/:id", authUser, async(req, res) => {
   try {
     const userID = req.params.id
-    //console.log(userID);
-    const queriedUser = await Order.find({ userID: userID });
+    const queriedOrder = await Order.find({ userID: userID });
     // sanitise user object to not send sensitive info card convert to string then string.slice(-4) and parse int
-    console.log(queriedUser);
-    res.status(200).json(queriedUser);
+    //console.log(queriedUser);
+    res.status(200).json(queriedOrder);
   } catch (err) {
     res.status(404).json({
       error: "order: Your request could not be processed. Please try again.",

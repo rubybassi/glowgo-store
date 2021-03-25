@@ -8,17 +8,21 @@ import AccordionActions from "@material-ui/core/AccordionActions";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import OrderItemName from "./OrderItemName";
+import OrderItemPrice from "./OrderItemPrice";
+import Moment from 'react-moment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    paddingBottom: 20,
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+    color: theme.palette.primary.dark,
   },
   icon: {
     verticalAlign: "bottom",
@@ -40,12 +44,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OrdersCard = () => {
+const OrdersCard = ({ order }) => {
   const classes = useStyles();
   return (
     <>
       <div className={classes.root}>
-        <Accordion defaultExpanded>
+        <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1c-content"
@@ -53,17 +57,18 @@ const OrdersCard = () => {
           >
             <div className={classes.column}>
               <Typography className={classes.heading}>
-                Date 23/06/2021
+                {/* Date {order?.createdAt} */}
+                Date <Moment format='Do MMMM YYYY h:mm a'>{order?.createdAt}</Moment>
               </Typography>
             </div>
             <div className={classes.column}>
-              <Typography className={classes.secondaryHeading}>
-                Order Number 1223ddq122334
+              <Typography className={classes.heading}>
+                Order No. {order?._id}
               </Typography>
             </div>
             <div className={classes.column}>
-              <Typography className={classes.secondaryHeading}>
-                Order Total £129.99
+              <Typography className={classes.heading} >
+                Order Total £{order?.orderTotal.toFixed(2)}
               </Typography>
             </div>
           </AccordionSummary>
@@ -71,18 +76,16 @@ const OrdersCard = () => {
             <Grid container>
               <Grid item sm={4}>
                 <Typography>Shipping Address</Typography>
-                <Typography>Address1</Typography>
-                <Typography>Address2</Typography>
-                <Typography>City</Typography>
-                <Typography>Postcode</Typography>
+                <Typography>{order?.shipping.address1}</Typography>
+                <Typography>{order?.shipping.address2}</Typography>
+                <Typography>{order?.shipping.city}</Typography>
+                <Typography>{order?.shipping.postcode}</Typography>
               </Grid>
               <Grid item sm={4}>
-                <Typography>Item name</Typography>
-                <Typography>Item name</Typography>
+                <OrderItemName item={order} />
               </Grid>
               <Grid item sm={2}>
-                <Typography align="right">price</Typography>
-                <Typography align="right">price</Typography>
+                <OrderItemPrice item={order} />
               </Grid>
               <Grid item sm={4}>
                 <Typography>Card Payment</Typography>
