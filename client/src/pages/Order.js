@@ -7,37 +7,36 @@ import { useParams } from "react-router-dom";
 import API from "../controllers/API";
 
 const Order = () => {
-  const { isLoading, userPayload, setIsLoading,setErrorMessage } = useContext(SiteContext);
+  const { isLoading, userPayload, setIsLoading, setErrorMessage } = useContext(
+    SiteContext
+  );
   const { id } = useParams();
   const [orderHistory, setOrderHistory] = useState([]);
-  //const custId = userPayload.user.id
-  //console.log("cust id in order useEffect is", id);
-//  useEffect(() => {
-//  getOrders(id)
-//  },[])
 
-useEffect(() => {
-const getOrders = async (id) => {
-  setIsLoading(true);
-  // do some form input error checking
-  const token = userPayload.token;
-  const response = await API.fetchGetToken(`/user/order/${id}`, token);
-  if (response) {
-    setOrderHistory(response);
-  } else {
-    setErrorMessage("There has been an error fetching your orders.");
-  }
-  setIsLoading(false);
-  console.log("cust orders payload,", response);
-}; getOrders(id)
-},[])
-
+  useEffect(() => {
+    const getOrders = async (id) => {
+      setIsLoading(true);
+      // do some form input error checking
+      const token = userPayload.token;
+      const response = await API.fetchGetToken(`/user/order/${id}`, token);
+      if (response) {
+        setOrderHistory(response);
+      } else {
+        setErrorMessage("There has been an error fetching your orders.");
+      }
+      setIsLoading(false);
+    };
+    getOrders(id);
+  }, []);
 
   return (
     <div>
       <Container>
         {!isLoading && (
-          <Orders name={userPayload.user?.firstname} orderHistory={orderHistory}/>
+          <Orders
+            name={userPayload.user?.firstname}
+            orderHistory={orderHistory}
+          />
         )}
       </Container>
     </div>

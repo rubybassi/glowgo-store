@@ -150,6 +150,8 @@ const SiteContextProvider = ({ children }) => {
   // updates cart state from user add to cart event
   const addtoCart = (item) => {
     setCartItems((prev) => [...prev, item]);
+    Helpers.notify("added to cart");
+    console.log("toaster clicked");
   };
   // updates cart state when user removes item from cart by index
   const removeItemFromCart = (id) => {
@@ -263,7 +265,7 @@ const SiteContextProvider = ({ children }) => {
         onPayment,
         orderHistory,
         setIsLoading,
-        setErrorMessage
+        setErrorMessage,
       }}
     >
       {children}

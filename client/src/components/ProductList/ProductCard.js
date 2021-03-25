@@ -13,6 +13,8 @@ import useStyles from "./styles";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import SiteContext from "../../SiteContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Product = ({ item }) => {
   const { addtoCart, getBrandById, getProductById } = useContext(SiteContext);
@@ -29,15 +31,15 @@ const Product = ({ item }) => {
             onClick={() => getProductById(item._id)}
             color="primary"
           />
-           </Link>
-          <div className={classes.cardContent}>
-            <Typography variant="h6" gutterBottom color="textPrimary">
-              {item.name}
-            </Typography>
-            <Typography variant="h6" color="textPrimary">
-              £{item.price.toFixed(2)}
-            </Typography>
-          </div>
+        </Link>
+        <div className={classes.cardContent}>
+          <Typography variant="h6" gutterBottom color="textPrimary">
+            {item.name}
+          </Typography>
+          <Typography variant="h6" color="textPrimary">
+            £{item.price.toFixed(2)}
+          </Typography>
+        </div>
         <Typography variant="body2" color="textSecondary">
           {item.pkSize}
         </Typography>
@@ -62,9 +64,31 @@ const Product = ({ item }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.CardActions}>
-        <IconButton aria-label="Add to cart" onClick={() => addtoCart({name: item.name, id: item._id, qty: 1, image: item.imageProductUrl[0], price: item.price})}>
+        <IconButton
+          aria-label="Add to cart"
+          onClick={() =>
+            addtoCart({
+              name: item.name,
+              id: item._id,
+              qty: 1,
+              image: item.imageProductUrl[0],
+              price: item.price,
+            })
+          }
+        >
           <AddShoppingCart addeditem={item} />
         </IconButton>
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </CardActions>
     </Card>
   );

@@ -8,6 +8,8 @@ import {
 } from "@material-ui/core";
 import useStyles from "./styles";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductPage = ({
   name,
@@ -18,7 +20,7 @@ const ProductPage = ({
   imageProductUrl,
   getBrandById,
   addtoCart,
-  _id
+  _id,
 }) => {
   const classes = useStyles();
 
@@ -28,13 +30,18 @@ const ProductPage = ({
         <Grid item xs={12} sm={6}>
           <CardMedia
             className={classes.media}
-            image={imageProductUrl && imageProductUrl[0] || null}
+            image={(imageProductUrl && imageProductUrl[0]) || null}
             title={name}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Grid item>
-            <Typography variant="h3" align="left" gutterBottom color="textPrimary">
+            <Typography
+              variant="h3"
+              align="left"
+              gutterBottom
+              color="textPrimary"
+            >
               {name}
             </Typography>
           </Grid>
@@ -68,7 +75,15 @@ const ProductPage = ({
               variant="outlined"
               size="medium"
               display="block"
-              onClick={() => addtoCart({name: name, id: _id, qty: 1, image: imageProductUrl[0], price: price})}
+              onClick={() =>
+                addtoCart({
+                  name: name,
+                  id: _id,
+                  qty: 1,
+                  image: imageProductUrl[0],
+                  price: price,
+                })
+              }
             >
               Add to Cart
             </Button>
@@ -79,6 +94,17 @@ const ProductPage = ({
               {description}
             </Typography>
           </Grid>
+          <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </Grid>
       </Grid>
     </div>

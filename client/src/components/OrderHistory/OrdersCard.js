@@ -20,10 +20,6 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
   },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.primary.dark,
-  },
   icon: {
     verticalAlign: "bottom",
     height: 20,
@@ -42,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline",
     },
   },
+  summary: {
+    backgroundColor: theme.palette.secondary.main,
+  }
 }));
 
 const OrdersCard = ({ order }) => {
@@ -49,26 +48,26 @@ const OrdersCard = ({ order }) => {
   return (
     <>
       <div className={classes.root}>
-        <Accordion>
+        <Accordion >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1c-content"
             id="panel1c-header"
+            className={classes.summary}
           >
             <div className={classes.column}>
               <Typography className={classes.heading}>
-                {/* Date {order?.createdAt} */}
-                Date <Moment format='Do MMMM YYYY h:mm a'>{order?.createdAt}</Moment>
+                <strong>Date</strong> <Moment format='Do MMMM YYYY h:mm a'>{order?.createdAt}</Moment>
               </Typography>
             </div>
             <div className={classes.column}>
               <Typography className={classes.heading}>
-                Order No. {order?._id}
+              <strong>Order No.</strong> {order?._id}
               </Typography>
             </div>
             <div className={classes.column}>
               <Typography className={classes.heading} >
-                Order Total £{order?.orderTotal.toFixed(2)}
+              <strong>Order Total</strong>  £{order?.orderTotal.toFixed(2)}
               </Typography>
             </div>
           </AccordionSummary>
@@ -88,15 +87,12 @@ const OrdersCard = ({ order }) => {
                 <OrderItemPrice item={order} />
               </Grid>
               <Grid item sm={4}>
+                <br />
                 <Typography>Card Payment</Typography>
                 <Typography>xxxx xxxx xxxx 2123</Typography>
               </Grid>
             </Grid>
           </AccordionDetails>
-          <Divider />
-          <AccordionActions>
-            <Button size="small">Re-order</Button>
-          </AccordionActions>
         </Accordion>
       </div>
     </>
