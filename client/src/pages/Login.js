@@ -8,7 +8,7 @@ import SiteContext from "../SiteContext";
 const Login = () => {
   const {isLoggedIn} = useContext(SiteContext);
   return (
-    <div>
+    <div style={{marginTop: 20, marginBottom: 160}}>
       <Container style={{marginTop: 20}}>
         {isLoggedIn ? <Redirect to="/" /> :  <SignUp/>}
       </Container>

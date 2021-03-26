@@ -7,11 +7,17 @@
   color: black;
 }
 
-.slick-initialized .slick-slide {
-  height: 370px;
-}
-
 .header {
   padding-top: 30px;
   text-align: center;
+}
+
+.slick-track
+{
+    display: flex !important;
+    margin-bottom: 20px;
+}
+.slick-slide
+{
+    height: inherit !important;
 }

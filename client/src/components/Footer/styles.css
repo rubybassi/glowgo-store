@@ -1,5 +1,14 @@
-.footer {
-  background-color: black;
-  height: 200px;
-  color: white;
+footer {
+  background-color: #e4e8ef;
+  color:#444444;
+  height: 100px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.column > * {
+  padding-top: 10px;
+  font-size: 12px;
 }

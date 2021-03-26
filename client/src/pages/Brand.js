@@ -12,8 +12,8 @@ const Brand = () => {
     console.log("product in brand useeffect", id);
   }, []);
   return (
-    <div>
-      <Container style={{marginTop: 20}}>
+    <div style={{marginTop: 20, marginBottom: 160}}>
+      <Container style={{marginTop: 20} }>
         <Brands productsByBrand={productsByBrand} isLoading={isLoading} />
       </Container>
     </div>

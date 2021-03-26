@@ -4,7 +4,7 @@ import CartGrid from "../components/Cart/CartGrid";
 
 const Cart = () => {
   return (
-    <div>
+    <div style={{marginTop: 20, marginBottom: 160}}>
       <Container style={{marginTop: 20}}>
         <CartGrid/>
       </Container>

@@ -9,7 +9,7 @@ import CatergoryBanners from "../components/Category/CategoryBanner";
 const Home = () => {
   const { bestsellers } = useContext(SiteContext);
   return (
-    <div>
+    <div style={{marginTop: 20, marginBottom: 160}}>
       <Container style={{marginTop: 20}}>
         <HomeCarousel />
         <CatergoryBanners/>

@@ -30,7 +30,7 @@ const Order = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{marginTop: 20, marginBottom: 160}}>
       <Container style={{marginTop: 20}}>
         {!isLoading && (
           <Orders

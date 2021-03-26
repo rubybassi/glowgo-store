@@ -14,7 +14,7 @@ const Category = () => {
     console.log("product in cateogry useeffect", id);
   }, []);
   return (
-    <div>
+    <div style={{marginTop: 20, marginBottom: 160}}>
       <Container style={{marginTop: 20}}>
         <Categories
           productsByCategory={productsByCategory}

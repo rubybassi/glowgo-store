@@ -12,7 +12,7 @@ const ProductDetail = () => {
     console.log("product in product useeffect", id);
   }, []);
   return (
-    <div>
+    <div style={{marginTop: 20, marginBottom: 160}}>
       <Container style={{marginTop: 20}}>
         <Product product={productById} isLoading={isLoading} />
       </Container>

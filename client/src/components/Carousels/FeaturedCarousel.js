@@ -9,6 +9,7 @@ import { motion, MotionConfig } from "framer-motion";
 
 const FeaturedCarousel = ({ items, header }) => {
   const settings = {
+    dots: true,
     infinite: true,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -65,7 +66,7 @@ const FeaturedCarousel = ({ items, header }) => {
                 >
                   <img src={item?.imageProductUrl[0]} />
                   <Typography
-                    variant="body1"
+                    variant="subtitle1"
                     color="textPrimary"
                     align="center"
                   >

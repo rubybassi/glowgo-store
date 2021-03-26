@@ -4,7 +4,7 @@ import Checkout from "../components/CheckoutProcess/Checkout";
 
 const CheckoutPage = () => {
   return (
-    <div>
+    <div style={{marginTop: 20, marginBottom: 160}}>
       <Container style={{marginTop: 20}}>
         <Checkout />
       </Container>
