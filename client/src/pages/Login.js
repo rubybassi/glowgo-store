@@ -9,7 +9,7 @@ const Login = () => {
   const {isLoggedIn} = useContext(SiteContext);
   return (
     <div>
-      <Container>
+      <Container style={{marginTop: 20}}>
         {isLoggedIn ? <Redirect to="/" /> :  <SignUp/>}
       </Container>
     </div>

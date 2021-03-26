@@ -13,8 +13,7 @@ const ProductDetail = () => {
   }, []);
   return (
     <div>
-      <Container>
-        <h4>Product</h4>
+      <Container style={{marginTop: 20}}>
         <Product product={productById} isLoading={isLoading} />
       </Container>
     </div>

@@ -5,7 +5,7 @@ import SignUp from "../components/Forms/SignUp";
 const Register = () => {
   return (
     <div>
-      <Container>
+      <Container style={{marginTop: 20}}>
         <SignUp/>
       </Container>
     </div>

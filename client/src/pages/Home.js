@@ -10,8 +10,7 @@ const Home = () => {
   const { bestsellers } = useContext(SiteContext);
   return (
     <div>
-      <Container>
-        <h4>Home</h4>
+      <Container style={{marginTop: 20}}>
         <HomeCarousel />
         <CatergoryBanners/>
         <FeaturedCarousel items={bestsellers} header={"BestSellers"} />

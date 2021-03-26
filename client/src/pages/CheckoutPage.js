@@ -5,8 +5,7 @@ import Checkout from "../components/CheckoutProcess/Checkout";
 const CheckoutPage = () => {
   return (
     <div>
-      <Container>
-        <h4>Checkout page</h4>
+      <Container style={{marginTop: 20}}>
         <Checkout />
       </Container>
     </div>

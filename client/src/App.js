@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer";
+import Footer from './components/Footer/Footer';
 import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
 import ProductDetail from "./pages/ProductDetail";
@@ -14,11 +14,13 @@ import Order from "./pages/Order";
 import Container from '@material-ui/core/Container';
 import { AuthenticatedRoute } from "./hooks/AuthRoute";
 import CheckoutPage from "./pages/CheckoutPage";
+import NotificationNav from "./components/NotificationBar/NotificationNav";
 
 function App() {
   return (
       <Router>
         <NavBar />
+        <NotificationNav/>
         <Container>
         <Switch>
           <Route exact path="/" component={Home} />

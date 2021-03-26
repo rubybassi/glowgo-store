@@ -13,8 +13,7 @@ const Brand = () => {
   }, []);
   return (
     <div>
-      <Container>
-        <h4>Brands</h4>
+      <Container style={{marginTop: 20}}>
         <Brands productsByBrand={productsByBrand} isLoading={isLoading} />
       </Container>
     </div>

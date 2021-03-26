@@ -96,7 +96,7 @@ router.post("/login", async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(403).json({
+    res.status(500).json({
       error: "Your request could not be processed. Please try again.",
     });
     console.log('error', err)

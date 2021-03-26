@@ -15,8 +15,7 @@ const Category = () => {
   }, []);
   return (
     <div>
-      <Container>
-        <h4>Category</h4>
+      <Container style={{marginTop: 20}}>
         <Categories
           productsByCategory={productsByCategory}
           isLoading={isLoading}
