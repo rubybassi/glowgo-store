@@ -47,11 +47,10 @@ const CartSummary = () => {
           {isLoggedIn && (
             <Link to={"/user/checkout"}>
               <Button
-                className={classes.checkoutButton}
+                className={classes.mainCTAButton}
                 variant="contained"
                 size="medium"
                 display="block"
-                color="primary"
               >
                 <HttpsIcon></HttpsIcon>Secure Checkout
               </Button>
@@ -60,8 +59,8 @@ const CartSummary = () => {
           {!isLoggedIn && (
             <Link to={"/login"}>
               <Button
-                className={classes.button}
-                variant="outlined"
+                className={classes.mainCTAButton}
+                variant="contained"
                 size="medium"
                 display="block"
               >
