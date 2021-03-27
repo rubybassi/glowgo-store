@@ -7,7 +7,7 @@ Glowgo is a MERN application built with React, Node, Express and Mongoose. It's 
 
 The application allows users to browse the shop and register / sign in to proceed to checkout, and visit the protected order history route.
 
-Glowgo was developed by myself as my final project on the University of Birmingham Coding Bootcampt to demonstrate a fully functioning React application with server-side CRUD funtionality and user authentication.
+Glowgo was developed by myself as my final project on the University of Birmingham Coding Bootcamp to demonstrate a fully functioning React application with server-side CRUD funtionality and user authentication.
 
 The application allows the user to
 * Select products by brand or category
