@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import logo from "../../assets/glowgo.png";
 import {
   AppBar,
@@ -23,6 +23,7 @@ import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 export default function NavBar() {
+  const history = useHistory();
   const {
     userSearch,
     handleUserSearchInput,
@@ -61,6 +62,7 @@ export default function NavBar() {
     setAnchorEl(null);
     handleMobileMenuClose();
     onLogOut();
+    history.push('/');
   };
 
   // user dropdown function - desktop
