@@ -43,7 +43,7 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
-  const { onCheckoutSubmit } = useContext(SiteContext);
+  const { onCheckoutSubmit, errorMessage } = useContext(SiteContext);
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -60,7 +60,7 @@ export default function Checkout() {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Checkout
+          {errorMessage !== "" && <Typography component="h6" className={classes.error}>{errorMessage} </Typography>}
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (
@@ -72,6 +72,7 @@ export default function Checkout() {
           <React.Fragment>
             {activeStep === steps.length ? (
               <React.Fragment>
+                errorMessage
                 <Typography variant="h5" gutterBottom>
                   Thank you for your order.
                 </Typography>

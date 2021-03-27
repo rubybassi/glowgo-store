@@ -35,24 +35,24 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const loginValidation = () => {
+    const regexSimple = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/;
+    if (firstname === "" || firstname === null || firstname.length < 3) {
+      return false;
+    }
+    if (surname === "" || surname === null || surname.length < 3) {
+      return false;
+    }
+    if (!email.match(regexSimple)) {
+      return false;
+    }
+    if (password === "" || password === null || password.length < 6) {
+      return false;
+    }
+    return true;
+  };
+
   const onUserSignUp = async () => {
-    const loginValidation = () => {
-      const regexSimple = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/;
-      if (firstname === "" || firstname === null || firstname.length < 3) {
-        return false;
-      }
-      if (surname === "" || surname === null || surname.length < 3) {
-        return false;
-      }
-      if (!email.match(regexSimple)) {
-        return false;
-      }
-      if (password === "" || password === null || password.length < 6) {
-        return false;
-      }
-      return true;
-    };
-    
     event.preventDefault();
     if (loginValidation() === false) {
       setErrorMessage("please enter valid values");
@@ -90,7 +90,9 @@ export default function SignUp() {
         </Typography>
         <form className={classes.form} noValidate onSubmit={onUserSignUp}>
           {errorMessage && (
-            <Typography component="h6">{errorMessage} </Typography>
+            <Typography component="h6" className={classes.error}>
+              {errorMessage}{" "}
+            </Typography>
           )}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>

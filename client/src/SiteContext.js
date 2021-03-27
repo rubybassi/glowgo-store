@@ -257,7 +257,7 @@ const SiteContextProvider = ({ children }) => {
     });
   };
 
- // on checkout submit
+  // on checkout submit
   const onCheckoutSubmit = async () => {
     if (Helpers.loginValidation(shipping, payment) === false) {
       setErrorMessage("please enter valid values");
@@ -339,7 +339,7 @@ const SiteContextProvider = ({ children }) => {
         orderHistory,
         setIsLoading,
         setErrorMessage,
-        checkedOut
+        checkedOut,
       }}
     >
       {children}

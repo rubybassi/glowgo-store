@@ -5,10 +5,11 @@ import TextField from "@material-ui/core/TextField";
 import SiteContext from "../../SiteContext";
 
 export default function PaymentForm() {
-  const { payment, onPayment} = useContext(SiteContext);
+  const { payment, onPayment, errorMessage } = useContext(SiteContext);
 
   return (
     <React.Fragment>
+      {errorMessage !== "" && <Typography component="h6" className={classes.error}>{errorMessage} </Typography>}
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>

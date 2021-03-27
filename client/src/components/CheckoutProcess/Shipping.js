@@ -6,10 +6,11 @@ import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 
 export default function AddressForm() {
-  const { shipping, onShipping } = useContext(SiteContext);
+  const { shipping, onShipping, errorMessage } = useContext(SiteContext);
 
   return (
     <React.Fragment>
+      {errorMessage !== "" && <Typography component="h6" className={classes.error}>{errorMessage} </Typography>}
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>

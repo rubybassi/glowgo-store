@@ -45,6 +45,7 @@ const Helpers = {
     }
     return true;
   },
+  
   notify: (message) =>
     toast.dark(`${message}`, {
       position: "top-center",

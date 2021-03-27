@@ -21,4 +21,7 @@ export default makeStyles((theme) => ({
   link: {
     color: theme.palette.secondary.contrastText,
   },
+  error: {
+    color: "red",
+  }
 }));
