@@ -1,29 +1,86 @@
-# Create React Express App
+![](https://img.shields.io/badge/license-MIT-Green) ![GitHub Repo stars](https://img.shields.io/github/stars/rubybassi?style=social)
 
-## About This Boilerplate
+# Glowgo - MERN Ecommerce Store
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+## Description
+Glowgo is a MERN application built with React, Node, Express and Mongoose. It's a simple one-stop-shop eCommerce store that allows beauty lovers to shop their favourite brands. 
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+The application allows users to browse the shop and register / sign in to proceed to checkout, and visit the protected order history route.
 
-## Starting the app locally
+Glowgo was developed by myself as my final project on the University of Birmingham Coding Bootcampt to demonstrate a fully functioning React application with server-side CRUD funtionality and user authentication.
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+The application allows the user to
+* Select products by brand or category
+* Search by product name
+* Login and checkout (dummy payment checkout)
+* View their order history 
 
-```
-npm install
-```
+### User Story
 
-This should install node modules within the server and the client folder.
+> As a **beauty fan**, I want to **shop popular and emerging brands online, in a single place, that are accessible and delivered fast** so that **i can feel more confident in my skin and stay on top of trends**.
 
-After both installations complete, run the following command in your terminal:
 
-```
-npm start
-```
+## Table of Contents
+- [Preview](#Preview)
+- [Execute](#Execute)
+- [Contributing](#Contributing)
+- [License](#License)
+- [Environment](#Environment)
+- [Questions](#Questions)
 
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+## Preview
 
-## Deployment (Heroku)
+> Visit the deployed application on [Heroku](https://glowgo.herokuapp.com/).
 
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+#### Mobile Responsive Design
+![Glowgo](client/public/glowgo-mockup.png)
+
+#### Homepage
+![Preview](client/public/home.png)
+
+#### Product Search Page
+![Preview](client/public/product-list-page.png)
+
+#### Product Detail Page
+![Preview](client/public/product-page.png)
+
+#### Cart
+![Preview](client/public/cart.png)
+
+#### Checkout
+![Preview](client/public/checkout.png)
+
+#### Order History
+![Preview](client/public/order-history.png)
+
+## Future Development
+
+* Enhanced search engine functionality utilising MongoDB Atlas Search
+* Implement a sort by feature
+* Create and update user address book
+* Leave user reviews
+* Integrate Stripe payment gateway
+* Admin product management
+
+## Contributing
+Contributions are welcomed.
+
+## License
+MIT
+
+## Environment
+* React.js
+* Mongoose and MongoDB Atlas
+* Express.js
+* Node.js
+* React Material UI
+* Joi validation
+* Framer Motion
+* Slick slide
+* Cloudenary
+* Postman
+* Jason Web Token
+* React Toastify
+* Git
+* GitHub
+* Heroku
