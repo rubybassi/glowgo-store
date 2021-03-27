@@ -136,7 +136,7 @@ const SiteContextProvider = ({ children }) => {
     const fetchAllCategories = async () => {
       try {
         setIsLoading(true);
-        const payload = await API.fetch("api/product/category");
+        const payload = await API.fetch("/product/category");
         setCategories(payload);
         setIsLoading(false);
       } catch (error) {
@@ -152,7 +152,7 @@ const SiteContextProvider = ({ children }) => {
     const fetchAllBrands = async () => {
       try {
         setIsLoading(true);
-        const payload = await API.fetch("api/product/brand");
+        const payload = await API.fetch("/product/brand");
         setBrands(payload);
         setIsLoading(false);
       } catch (error) {
@@ -169,7 +169,7 @@ const SiteContextProvider = ({ children }) => {
   const getCategoryById = async (id) => {
     try {
       setIsLoading(true);
-      const payload = await API.fetch(`api/product/category/${id}`);
+      const payload = await API.fetch(`/product/category/${id}`);
       setProductsByCategory(payload);
       setIsLoading(false);
     } catch (error) {
@@ -182,7 +182,7 @@ const SiteContextProvider = ({ children }) => {
   const getBrandById = async (id) => {
     try {
       setIsLoading(true);
-      const payload = await API.fetch(`api/product/brand/${id}`);
+      const payload = await API.fetch(`/product/brand/${id}`);
       setProductsByBrand(payload);
       setIsLoading(false);
     } catch (error) {
@@ -195,7 +195,7 @@ const SiteContextProvider = ({ children }) => {
   const getProductById = async (id) => {
     try {
       setIsLoading(true);
-      const payload = await API.fetch(`api/product/${id}`);
+      const payload = await API.fetch(`/product/${id}`);
       setProductById(payload);
       setIsLoading(false);
     } catch (error) {
@@ -208,7 +208,7 @@ const SiteContextProvider = ({ children }) => {
   const getAllProducts = async () => {
     try {
       setIsLoading(true);
-      const payload = await API.fetch("api/product/all");
+      const payload = await API.fetch("/product/all");
       setProducts(payload);
       setIsLoading(false);
     } catch (error) {
@@ -306,7 +306,7 @@ const SiteContextProvider = ({ children }) => {
     try {
       setIsLoading(true);
       console.log('searched for', searched);
-      const payload = await API.fetch(`api/product?search=${searched}`);
+      const payload = await API.fetch(`/product?search=${searched}`);
       setProductsBySearch(payload);
       setSearched('');
       setIsLoading(false);
