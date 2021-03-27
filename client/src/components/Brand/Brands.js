@@ -11,16 +11,16 @@ const Brands = ({ productsByBrand, isLoading }) => {
 
       {!isLoading && (
         <FeaturedHeader
-          name={productsByBrand.name}
-          description={productsByBrand.description}
-          image={productsByBrand.logo}
+          name={productsByBrand?.name}
+          description={productsByBrand?.description}
+          image={productsByBrand?.logo}
         />
       )}
 
       <Grid container spacing={4}>
         {!isLoading &&
-          productsByBrand.products?.map((item) => (
-            <Grid item key={item._id} xs={12} sm={6} md={4}>
+          productsByBrand?.products?.map((item) => (
+            <Grid item key={item?._id} xs={12} sm={6} md={4}>
               <ProductCard item={item} />
             </Grid>
           ))}

@@ -12,13 +12,18 @@ const Order = () => {
   );
   const { id } = useParams();
   const [orderHistory, setOrderHistory] = useState([]);
+  
+  const getToken = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user.token;
+  }
 
   useEffect(() => {
     const getOrders = async (id) => {
       setIsLoading(true);
       // do some form input error checking
       const token = userPayload.token;
-      const response = await API.fetchGetToken(`/user/order/${id}`, token);
+      const response = await API.fetchGetToken(`/api/user/order/${id}`, getToken());
       if (response) {
         setOrderHistory(response);
       } else {

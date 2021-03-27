@@ -26,8 +26,8 @@ conn.once("open", function () {
 });
 
 // Define API routes here
-app.use('/product', require('./backend/routes/product.js'));
-app.use('/user', require('./backend/routes/user.js'));
+app.use('/api/product', require('./backend/routes/product.js'));
+app.use('/api/user', require('./backend/routes/user.js'));
 app.use('/', require('./backend/routes/home.js'));
 
 // Send every other request to the React app
