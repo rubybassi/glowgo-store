@@ -22,11 +22,10 @@ The application allows the user to
 
 ## Table of Contents
 - [Preview](#Preview)
-- [Execute](#Execute)
+- [Future-Development](#Future-Development)
 - [Contributing](#Contributing)
 - [License](#License)
 - [Environment](#Environment)
-- [Questions](#Questions)
 
 ## Preview
 
@@ -53,7 +52,7 @@ The application allows the user to
 #### Order History
 ![Preview](client/public/order-history.png)
 
-## Future Development
+## Future-Development
 
 * Enhanced search engine functionality utilising MongoDB Atlas Search
 * Implement a sort by feature
