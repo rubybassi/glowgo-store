@@ -26,4 +26,8 @@ export default makeStyles((theme) => ({
   btn: {
     paddingLeft: 0,
   },
+  imgContainer: {
+    overflow: "hidden",
+    paddingBottom: 10,
+  }
 }));

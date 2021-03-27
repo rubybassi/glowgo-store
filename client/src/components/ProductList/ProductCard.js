@@ -15,6 +15,7 @@ import { useContext } from "react";
 import SiteContext from "../../SiteContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { motion, MotionConfig } from "framer-motion";
 
 const Product = ({ item }) => {
   const { addtoCart, getBrandById, getProductById } = useContext(SiteContext);
@@ -24,13 +25,15 @@ const Product = ({ item }) => {
     <Card className={classes.root}>
       <CardContent>
         <Link to={`/product/${item._id}`} className={classes.link}>
-          <CardMedia
-            className={classes.media}
-            image={item.imageProductUrl[0]}
-            title={item.name}
-            onClick={() => getProductById(item._id)}
-            color="primary"
-          />
+          <motion.div whileHover={{ scale: 1.1 }} className={classes.imgContainer}>
+            <CardMedia
+              className={classes.media}
+              image={item.imageProductUrl[0]}
+              title={item.name}
+              onClick={() => getProductById(item._id)}
+              color="primary"
+            />
+          </motion.div>
         </Link>
         <div className={classes.cardContent}>
           <Typography variant="h6" gutterBottom color="textPrimary">
