@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import logo from "../../assets/glowgo.png";
 import {
@@ -11,6 +11,7 @@ import {
   Menu,
   Drawer,
   Typography,
+  Button,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
@@ -32,6 +33,8 @@ export default function NavBar() {
     onLogOut,
     isLoggedIn,
     getOrders,
+    getbySearch,
+    searched
   } = useContext(SiteContext);
 
   // @material ui styling props and functions
@@ -62,7 +65,7 @@ export default function NavBar() {
     setAnchorEl(null);
     handleMobileMenuClose();
     onLogOut();
-    history.push('/');
+    history.push("/");
   };
 
   // user dropdown function - desktop
@@ -98,7 +101,7 @@ export default function NavBar() {
             className={classes.link}
           >
             {/* <ListItem button onClick={() => getOrders(userPayload.user.id)}> */}
-              <p>My Account</p>
+            <p>My Account</p>
             {/* </ListItem> */}
           </Link>
         </MenuItem>
@@ -192,11 +195,15 @@ export default function NavBar() {
             />
           </Link>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
+            <Link to={`/product?search=${searched}`} className={classes.link}>
+              <Button onClick={getbySearch}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+              </Button>
+            </Link>
             <InputBase
-              value={userSearch}
+              value={searched}
               onChange={handleUserSearchInput}
               placeholder="Search…"
               classes={{

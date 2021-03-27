@@ -17,7 +17,6 @@ const SiteContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(getCart()?.cartItems || []);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const [userSearch, setUserSearch] = useState("");
   const [shipping, setShipping] = useState({});
   const [payment, setPayment] = useState({});
   const [isLoggedIn, setIsloggedIn] = useState(false);
@@ -27,6 +26,8 @@ const SiteContextProvider = ({ children }) => {
   const [order, setOrder] = useState([]);
   const [orderHistory, setOrderHistory] = useState([]);
   const [checkedOut, setCheckedOut] = useState(false);
+  const [searched, setSearched] = useState('');
+  const [productsBySearch, setProductsBySearch,] = useState([]);
 
   //============================USER AUTH AND LOGIN STATUS ======================
 
@@ -296,8 +297,25 @@ const SiteContextProvider = ({ children }) => {
   // gets and sets user input from search bar
   const handleUserSearchInput = (e) => {
     const searched = e.target.value;
-    setUserSearch(searched);
+    console.log('searched');
+    setSearched(searched);
   };
+
+  // fetch products by query params
+  const getbySearch = async () => {
+    try {
+      setIsLoading(true);
+      console.log('searched for', searched);
+      const payload = await API.fetch(`/product?search=${searched}`);
+      setProductsBySearch(payload);
+      setSearched('');
+      setIsLoading(false);
+    } catch (error) {
+      setErrorMessage("There has been an error fetching your data.");
+      setIsLoading(false);
+    }
+  };
+ 
 
   return (
     <SiteContext.Provider
@@ -307,8 +325,6 @@ const SiteContextProvider = ({ children }) => {
         brands,
         isLoading,
         addtoCart,
-        handleUserSearchInput,
-        userSearch,
         cartItems,
         getCategoryById,
         getBrandById,
@@ -340,6 +356,10 @@ const SiteContextProvider = ({ children }) => {
         setIsLoading,
         setErrorMessage,
         checkedOut,
+        getbySearch,
+        handleUserSearchInput,
+        searched,
+        productsBySearch
       }}
     >
       {children}
