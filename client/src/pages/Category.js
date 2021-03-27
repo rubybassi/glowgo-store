@@ -11,7 +11,6 @@ const Category = () => {
   );
   useEffect(() => {
     getCategoryById(id);
-    console.log("product in cateogry useeffect", id);
   }, []);
   return (
     <div style={{marginTop: 20, marginBottom: 160}}>

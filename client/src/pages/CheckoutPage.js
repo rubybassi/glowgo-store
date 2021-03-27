@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 const CheckoutPage = (props) => {
   const history = useHistory();
   const { checkedOut } = useContext(SiteContext);
-  console.log("checkout props", props);
 
   useEffect(() => {
     checkedOut === true

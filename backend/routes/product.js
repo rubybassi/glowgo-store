@@ -134,50 +134,5 @@ router.get("/", async (req, res) => {
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
-/*
-//==========POST REQUESTS FOR TESTING INITIAL SEED DATA IN POSTMAN============
-
-// @POST product to db
-router.post("/add", async ({ body }, res) => {
-  try {
-    const queriedProduct = await Product.create(body);
-    res.status(200).json(queriedProduct);
-  } catch (err) {
-    res
-      .status(404)
-      .json({
-        error: "Your request could not be processed. Please try again.",
-      });
-  }
-});
-
-// @POST brand
-router.post("/add/brand", async ({ body }, res) => {
-  try {
-    const queriedBrand = await Brand.create(body);
-    res.status(200).json(queriedBrand);
-  } catch (err) {
-    res
-      .status(404)
-      .json({
-        error: "Your request could not be processed. Please try again.",
-      });
-  }
-});
-
-// @POST category
-router.post("/add/category", async ({ body }, res) => {
-  try {
-    const queriedCategory = await Category.create(body);
-    res.status(200).json(queriedCategory);
-  } catch (err) {
-    res
-      .status(404)
-      .json({
-        error: "Your request could not be processed. Please try again.",
-      });
-  }
-});
-*/
 
 module.exports = router;

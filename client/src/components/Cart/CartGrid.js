@@ -6,7 +6,6 @@ import CartSummary from "./CartSummary";
 
 const CartGrid = () => {
   const classes = useStyles();
-  // checkout button decide if cart should be posted after payment or before
   return (
     <div className={classes.root}>
       <Grid container>

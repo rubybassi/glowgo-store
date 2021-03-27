@@ -21,7 +21,6 @@ const Order = () => {
   useEffect(() => {
     const getOrders = async (id) => {
       setIsLoading(true);
-      // do some form input error checking
       const token = userPayload.token;
       const response = await API.fetchGetToken(`/api/user/order/${id}`, getToken());
       if (response) {

@@ -7,9 +7,7 @@ const { Order } = require("../../database/index");
 router.post("/checkout", authUser, async (req, res) => {
   try {
     const newOrder = req.body;
-    // console.log("order", newOrder);
     const queriedUser = await Order.create(newOrder);
-    //const token = req.token;
     res.status(200).json(queriedUser);
   } catch (err) {
     res.status(500).json({

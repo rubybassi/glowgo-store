@@ -9,7 +9,6 @@ const Brand = () => {
   const { getBrandById, productsByBrand, isLoading } = useContext(SiteContext);
   useEffect(() => {
     getBrandById(id);
-    console.log("product in brand useeffect", id);
   }, []);
   return (
     <div style={{marginTop: 20, marginBottom: 160}}>

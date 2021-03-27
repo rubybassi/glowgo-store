@@ -7,7 +7,6 @@ const ProductList = () => {
   const { getAllProducts, isLoading, products } = useContext(SiteContext);
   useEffect(() => {
     getAllProducts();
-    console.log("product all in product list useeffect");
   }, []);
   return (
     <div style={{marginTop: 20, marginBottom: 160}}>

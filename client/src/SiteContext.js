@@ -278,7 +278,6 @@ const SiteContextProvider = ({ children }) => {
       const response = await API.fetch("/api/user/checkout", newOrder, token);
       setOrder(response.payload);
       setIsLoading(false);
-      console.log("order submited");
       setShipping("");
       setPayment("");
       toast.success("order submitted successfully!");
@@ -297,7 +296,6 @@ const SiteContextProvider = ({ children }) => {
   // gets and sets user input from search bar
   const handleUserSearchInput = (e) => {
     const searched = e.target.value;
-    console.log('searched');
     setSearched(searched);
   };
 
@@ -305,7 +303,6 @@ const SiteContextProvider = ({ children }) => {
   const getbySearch = async () => {
     try {
       setIsLoading(true);
-      console.log('searched for', searched);
       const payload = await API.fetch(`/api/product?search=${searched}`);
       setProductsBySearch(payload);
       setSearched('');

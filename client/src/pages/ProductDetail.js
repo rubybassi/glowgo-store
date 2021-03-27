@@ -9,7 +9,6 @@ const ProductDetail = () => {
   const { getProductById, productById, isLoading } = useContext(SiteContext);
   useEffect(() => {
     getProductById(id);
-    console.log("product in product useeffect", id);
   }, []);
   return (
     <div style={{marginTop: 20, marginBottom: 160}}>
