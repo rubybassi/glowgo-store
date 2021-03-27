@@ -28,11 +28,13 @@ const ProductPage = ({
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
-          <CardMedia
-            className={classes.media}
-            image={(imageProductUrl && imageProductUrl[0]) || null}
-            title={name}
-          />
+          {imageProductUrl && (
+            <CardMedia
+              className={classes.media}
+              image={(imageProductUrl && imageProductUrl[0]) || null}
+              title={name}
+            />
+          )}
         </Grid>
         <Grid item xs={12} sm={6}>
           <Grid item>

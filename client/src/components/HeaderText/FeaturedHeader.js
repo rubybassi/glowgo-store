@@ -8,23 +8,21 @@ const FeaturedHeader = ({ image, name, description }) => {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item sm={12} md={6}>
-        <CardMedia
-            className={classes.media}
-            image={image}
-            title={name}
-          />
+          {image && (
+            <CardMedia className={classes.media} image={image} title={name} />
+          )}
         </Grid>
         <Grid item sm={12} md={6}>
           <Grid item sm>
-          <Typography variant="h3" color="textPrimary">
+            <Typography variant="h3" color="textPrimary">
               {name}
             </Typography>
           </Grid>
           <Grid item sm>
-          <Typography variant="body1" color="textPrimary">
+            <Typography variant="body1" color="textPrimary">
               {description}
             </Typography>
-          </Grid>    
+          </Grid>
         </Grid>
       </Grid>
     </div>
