@@ -2,6 +2,7 @@ import { useState, createContext, useEffect } from "react";
 const SiteContext = createContext();
 import API from "./controllers/API";
 import Helpers from "./controllers/Helpers";
+import { toast } from "react-toastify";
 
 const SiteContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
@@ -27,30 +28,41 @@ const SiteContextProvider = ({ children }) => {
   const [orderHistory, setOrderHistory] = useState([]);
 
   //============================USER AUTH AND LOGIN STATUS ======================
+
   // posts user sign in then sets state and local storage if successfull
   const onUserSignIn = async (e) => {
     e.preventDefault();
     const newUser = { email, password };
-    if (email.length < 3 || password.length < 3) {
+    if (email.length < 3 || password.length < 6) {
       setErrorMessage("Please enter a value");
       return;
     }
-    const response = await API.fetch("/login", newUser);
-    if (response?.success && response?.payload.token) {
-      setUserPayload(response.payload);
-      setIsloggedIn(true);
-      localStorage.setItem("user", JSON.stringify(response.payload));
-      localStorage.setItem("loggedStatus", JSON.stringify({ status: true }));
-      setErrorMessage("");
-    } else {
+    try {
+      setIsLoading(true);
+      const response = await API.fetch("/login", newUser);
+      if (response?.success && response?.payload.token) {
+        setUserPayload(response.payload);
+        setIsloggedIn(true);
+        localStorage.setItem("user", JSON.stringify(response.payload));
+        localStorage.setItem("loggedStatus", JSON.stringify({ status: true }));
+        setErrorMessage("");
+        setEmail("");
+        setPassword("");
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+        setIsloggedIn(false);
+        setErrorMessage(
+          "There has been an error logging in. Please try again using your correct credentials"
+        );
+      }
+    } catch (err) {
+      console.log(err);
       setIsloggedIn(false);
-      setErrorMessage(
-        "There has been an error logging in. Please try again using your correct credentials"
-      );
+      toast.error("Something went wrong logging you in. Please try again.");
     }
-    setEmail("");
-    setPassword("");
   };
+
   // gets and sets logged userstate from local storage
   useEffect(() => {
     const getUserfromstore = JSON.parse(localStorage.getItem("user"));
@@ -64,20 +76,25 @@ const SiteContextProvider = ({ children }) => {
     }
     setIsloggedIn(getUserStatus);
   }, []);
+
   // on passsword submit
   const onPassword = (e) => {
     setPassword(e.target.value);
   };
+
   // on email submit
   const onEmail = (e) => {
     setEmail(e.target.value);
   };
+
   // logs out user on request and clears user toekn and payload
   const onLogOut = () => {
     setIsloggedIn(false);
     localStorage.clear();
   };
+
   //============================INITIAL PRODUCT LOAD ACTIONS=======================
+
   // fetches all bestselling products
   useEffect(() => {
     const fetchAllBestsellers = async () => {
@@ -88,71 +105,123 @@ const SiteContextProvider = ({ children }) => {
         setIsLoading(false);
       } catch (error) {
         setBestsellers([]);
-        setIsLoading(false); // add user error message toaster
+        setIsLoading(false);
+        toast.error("Something went wrong fetching the products");
       }
     };
     fetchAllBestsellers();
   }, []);
-  // fetches all bestselling products
+
+  // fetches all new arrivals products
   useEffect(() => {
     const fetchAllNewArrivals = async () => {
-      const payload = await API.fetch("/product/newarrivals");
-      setNewarrivals(payload);
+      try {
+        setIsLoading(true);
+        const payload = await API.fetch("/product/newarrivals");
+        setNewarrivals(payload);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        toast.error("Something went wrong fetching the products");
+      }
     };
     fetchAllNewArrivals();
   }, []);
+
   // fetches all categories
   useEffect(() => {
     const fetchAllCategories = async () => {
-      const payload = await API.fetch("/product/category");
-      setCategories(payload);
+      try {
+        setIsLoading(true);
+        const payload = await API.fetch("/product/category");
+        setCategories(payload);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        toast.error("Something went wrong fetching the products");
+      }
     };
     fetchAllCategories();
   }, []);
+
   // fetches all brands
   useEffect(() => {
     const fetchAllBrands = async () => {
-      const payload = await API.fetch("/product/brand");
-      setBrands(payload);
+      try {
+        setIsLoading(true);
+        const payload = await API.fetch("/product/brand");
+        setBrands(payload);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        toast.error("Something went wrong fetching the products");
+      }
     };
     fetchAllBrands();
   }, []);
+
   //============================USER PRODUCT SELECTION ACTIONS=======================
+
   // get products by category selection
   const getCategoryById = async (id) => {
-    setIsLoading(true);
-    const payload = await API.fetch(`/product/category/${id}`);
-    setProductsByCategory(payload);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const payload = await API.fetch(`/product/category/${id}`);
+      setProductsByCategory(payload);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Something went wrong fetching the products");
+    }
   };
+
   // get products by brand selection
   const getBrandById = async (id) => {
-    setIsLoading(true);
-    const payload = await API.fetch(`/product/brand/${id}`);
-    setProductsByBrand(payload);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const payload = await API.fetch(`/product/brand/${id}`);
+      setProductsByBrand(payload);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Something went wrong fetching the products");
+    }
   };
+
   // get products by id on product list selection
   const getProductById = async (id) => {
-    setIsLoading(true);
-    const payload = await API.fetch(`/product/${id}`);
-    setProductById(payload);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const payload = await API.fetch(`/product/${id}`);
+      setProductById(payload);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Something went wrong fetching the products");
+    }
   };
+
   // get all products on all products drawer selection
   const getAllProducts = async () => {
-    setIsLoading(true);
-    const payload = await API.fetch("/product/all");
-    setProducts(payload);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const payload = await API.fetch("/product/all");
+      setProducts(payload);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Something went wrong fetching the products");
+    }
   };
+
   //============================CART ACTIONS=======================
+
   // updates cart state from user add to cart event
   const addtoCart = (item) => {
     setCartItems((prev) => [...prev, item]);
     Helpers.notify("added to cart");
-    console.log("toaster clicked");
   };
+
   // updates cart state when user removes item from cart by index
   const removeItemFromCart = (id) => {
     const index = cartItems.findIndex((item) => item._id === id);
@@ -160,11 +229,14 @@ const SiteContextProvider = ({ children }) => {
     newCart.splice(index, 1);
     setCartItems(newCart);
   };
+
   // pushes cart items to local storage when cart state changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify({ cartItems }));
   }, [cartItems]);
+
   //============================CHECKOUT ACTIONS=======================
+
   // on checkout shipping input
   const onShipping = (e) => {
     const value = e.target.value;
@@ -173,6 +245,7 @@ const SiteContextProvider = ({ children }) => {
       [e.target.name]: value,
     });
   };
+
   // on checkout payment input
   const onPayment = (e) => {
     const value = e.target.value;
@@ -181,45 +254,42 @@ const SiteContextProvider = ({ children }) => {
       [e.target.name]: value,
     });
   };
-  // on checkout submit
+
+ // on checkout submit
   const onCheckoutSubmit = async () => {
-    setIsLoading(true);
-    // do some form input error checking
-    const newOrder = {
-      shipping,
-      payment,
-      cartItems,
-      userID: userPayload.user.id,
-      orderTotal: Helpers.GetTotalSum(cartItems),
-      shippingFee: "Free",
-    };
-    const token = userPayload.token;
-    const response = await API.fetch("/user/checkout", newOrder, token);
-    if (response?.success) {
-      setOrder(response.payload);
-    } else {
-      setErrorMessage("There has been an error submitting your order.");
+    if (Helpers.loginValidation(shipping, payment) === false) {
+      setErrorMessage("please enter valid values");
+      return;
     }
-    console.log("order is", newOrder);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const newOrder = {
+        shipping,
+        payment,
+        cartItems,
+        userID: userPayload.user.id,
+        orderTotal: Helpers.GetTotalSum(cartItems),
+        shippingFee: "Free",
+      };
+      const token = userPayload.token;
+      const response = await API.fetch("/user/checkout", newOrder, token);
+      setOrder(response.payload);
+      setIsLoading(false);
+      console.log("order submited");
+      setShipping("");
+      setPayment("");
+      toast.success("order submitted successfully!");
+      localStorage.removeItem("cart");
+      setCartItems([]);
+    } catch (error) {
+      setErrorMessage("There has been an error submitting your order.");
+      setIsLoading(false);
+      toast.error("please enter valid values");
+    }
   };
-  //============================USER HISTORY ACTIONS=======================
-  // gets user's order history
-  // const getOrders = async (id) => {
-  //   setIsLoading(true);
-  //   // do some form input error checking
-  //   const token = userPayload.token;
-  //   const response = await API.fetchGetToken(`/user/order/${id}`, token);
-  //   if (response?.ok) {
-  //     setOrderHistory(response);
-  //   } else {
-  //     setErrorMessage("There has been an error fetching your orders.");
-  //   }
-  //   setIsLoading(false);
-  //   console.log("cust orders payload,", response);
-  // };
 
   //============================USER SEARCH ACTIONS=======================
+
   // gets and sets user input from search bar
   const handleUserSearchInput = (e) => {
     const searched = e.target.value;

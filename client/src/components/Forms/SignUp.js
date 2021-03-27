@@ -11,9 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import API from "../../controllers/API";
 import useStyles from "./styles";
-import { useContext } from "react";
-import SiteContext from "../../SiteContext";
-import { Route, Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -30,22 +28,34 @@ function Copyright() {
 
 export default function SignUp() {
   const history = useHistory();
-  const { errorMessage, setErrorMessage } = useContext(SiteContext);
   const classes = useStyles();
   const [firstname, setFirstName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onUserSignUp = async () => {
+    const loginValidation = () => {
+      const regexSimple = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/;
+      if (firstname === "" || firstname === null || firstname.length < 3) {
+        return false;
+      }
+      if (surname === "" || surname === null || surname.length < 3) {
+        return false;
+      }
+      if (!email.match(regexSimple)) {
+        return false;
+      }
+      if (password === "" || password === null || password.length < 6) {
+        return false;
+      }
+      return true;
+    };
+    
     event.preventDefault();
-    if (
-      firstname.length < 3 ||
-      surname.length < 3 ||
-      email.length < 3 ||
-      password.length < 3
-    ) {
-      setErrorMessage("Please enter a value");
+    if (loginValidation() === false) {
+      setErrorMessage("please enter valid values");
       return;
     }
     const user = {
@@ -55,20 +65,18 @@ export default function SignUp() {
       password,
     };
     const response = await API.fetch("/register", user);
-    console.log("user saved to db", response);
     setFirstName("");
     setSurname("");
     setEmail("");
     setPassword("");
     if (response?.success) {
       history.push("/login");
-      //<Redirect to='/login'/>
     } else {
-      const errorMessage = response?.payload?.message;
-      console.log(errorMessage);
-      setErrorMessage(errorMessage);
+      setErrorMessage(
+        "email already exists. Please sign in or enter a different email."
+      );
     }
-    };
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -81,7 +89,9 @@ export default function SignUp() {
           Sign up
         </Typography>
         <form className={classes.form} noValidate onSubmit={onUserSignUp}>
-        {errorMessage !== "" && <Typography component="h6">{errorMessage} </Typography>}
+          {errorMessage && (
+            <Typography component="h6">{errorMessage} </Typography>
+          )}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -129,7 +139,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Password* (6 or more characters)"
                 type="password"
                 id="password"
                 autoComplete="current-password"

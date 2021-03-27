@@ -4,10 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionActions from "@material-ui/core/AccordionActions";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
 import OrderItemName from "./OrderItemName";
 import OrderItemPrice from "./OrderItemPrice";
 import Moment from 'react-moment';
@@ -75,10 +72,10 @@ const OrdersCard = ({ order }) => {
             <Grid container>
               <Grid item sm={4}>
                 <Typography>Shipping Address</Typography>
-                <Typography>{order?.shipping.address1}</Typography>
-                <Typography>{order?.shipping.address2}</Typography>
-                <Typography>{order?.shipping.city}</Typography>
-                <Typography>{order?.shipping.postcode}</Typography>
+                <Typography>{order?.shipping?.address1}</Typography>
+                <Typography>{order?.shipping?.address2}</Typography>
+                <Typography>{order?.shipping?.city}</Typography>
+                <Typography>{order?.shipping?.postcode}</Typography>
               </Grid>
               <Grid item sm={4}>
                 <OrderItemName item={order} />

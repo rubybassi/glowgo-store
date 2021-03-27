@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Checkout from "../components/CheckoutProcess/Checkout";
+import { useHistory } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const CheckoutPage = () => {
+  const history = useHistory();
+
   return (
-    <div style={{marginTop: 20, marginBottom: 160}}>
-      <Container style={{marginTop: 20}}>
+    <div style={{ marginTop: 20, marginBottom: 160 }}>
+      <Container style={{ marginTop: 20 }}>
         <Checkout />
       </Container>
+      <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
     </div>
   );
 };

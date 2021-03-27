@@ -34,7 +34,7 @@ const Order = () => {
       <Container style={{marginTop: 20}}>
         {!isLoading && (
           <Orders
-            name={userPayload.user?.firstname}
+            name={userPayload?.user?.firstname}
             orderHistory={orderHistory}
           />
         )}

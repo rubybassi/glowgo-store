@@ -12,7 +12,7 @@ router.post("/checkout", authUser, async (req, res) => {
     //const token = req.token;
     res.status(200).json(queriedUser);
   } catch (err) {
-    res.status(404).json({
+    res.status(500).json({
       error: "order: Your request could not be processed. Please try again.",
     });
   }
@@ -24,10 +24,9 @@ router.get("/order/:id", authUser, async(req, res) => {
     const userID = req.params.id
     const queriedOrder = await Order.find({ userID: userID });
     // sanitise user object to not send sensitive info card convert to string then string.slice(-4) and parse int
-    //console.log(queriedUser);
     res.status(200).json(queriedOrder);
   } catch (err) {
-    res.status(404).json({
+    res.status(500).json({
       error: "order: Your request could not be processed. Please try again.",
     });
   }

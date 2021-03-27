@@ -30,7 +30,7 @@ export default function PaymentForm() {
             required
             id="cardNumber"
             name="number"
-            label="Card number"
+            label="Card number (16 digits)"
             fullWidth
             autoComplete="cc-number"
             value={payment.number || ""}
@@ -42,7 +42,7 @@ export default function PaymentForm() {
             required
             id="expDate"
             name="expiry"
-            label="Expiry date"
+            label="Expiry date (250221)"
             fullWidth
             autoComplete="cc-exp"
             value={payment.expiry || ""}

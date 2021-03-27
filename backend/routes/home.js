@@ -38,7 +38,7 @@ router.post("/register", async (req, res) => {
     // return sanitised data
     res.status(200).json({ success: true, payload: { user: user } });
   } catch (err) {
-    res.status(404).json({
+    res.status(500).json({
       success: false,
       error: "Your request could not be processed. Please try again.",
     });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/glowgo.png";
 import {
@@ -11,7 +11,6 @@ import {
   Menu,
   Drawer,
   Typography,
-  ListItem,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
@@ -209,7 +208,7 @@ export default function NavBar() {
           <div className={classes.sectionDesktop}>
             {isLoggedIn && (
               <Typography variant="h6" className={classes.name}>
-                Hi {userPayload.user?.firstname}!
+                Hi {userPayload?.user?.firstname}!
               </Typography>
             )}
 
