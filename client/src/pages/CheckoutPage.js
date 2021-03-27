@@ -1,27 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Container from "@material-ui/core/Container";
 import Checkout from "../components/CheckoutProcess/Checkout";
 import { ToastContainer } from "react-toastify";
+import SiteContext from "../SiteContext";
+import { useHistory } from "react-router-dom";
 
-const CheckoutPage = () => {
+const CheckoutPage = (props) => {
+  const history = useHistory();
+  const { checkedOut } = useContext(SiteContext);
+  console.log("checkout props", props);
 
+  useEffect(() => {
+    checkedOut === true
+      ? setTimeout(() => {
+          history.push("/");
+        }, 3000)
+      : null;
+  }, [checkedOut]);
 
   return (
     <div style={{ marginTop: 20, marginBottom: 160 }}>
       <Container style={{ marginTop: 20 }}>
-      <Checkout />
+        <Checkout />
       </Container>
       <ToastContainer
-          position="top-center"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

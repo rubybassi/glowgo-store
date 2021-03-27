@@ -12,7 +12,6 @@ import PaymentForm from "./Payment";
 import Review from "./Review";
 import useStyles from "./styles";
 import SiteContext from "../../SiteContext";
-import { useHistory } from "react-router-dom";
 
 // replace order number with db response
 
@@ -44,7 +43,6 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
-  const history = useHistory();
   const { onCheckoutSubmit } = useContext(SiteContext);
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);

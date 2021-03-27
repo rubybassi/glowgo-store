@@ -26,6 +26,7 @@ const SiteContextProvider = ({ children }) => {
   const [userPayload, setUserPayload] = useState({});
   const [order, setOrder] = useState([]);
   const [orderHistory, setOrderHistory] = useState([]);
+  const [checkedOut, setCheckedOut] = useState(false);
 
   //============================USER AUTH AND LOGIN STATUS ======================
 
@@ -91,6 +92,7 @@ const SiteContextProvider = ({ children }) => {
   const onLogOut = () => {
     setIsloggedIn(false);
     localStorage.clear();
+    setCheckedOut(false);
   };
 
   //============================INITIAL PRODUCT LOAD ACTIONS=======================
@@ -281,6 +283,7 @@ const SiteContextProvider = ({ children }) => {
       toast.success("order submitted successfully!");
       localStorage.removeItem("cart");
       setCartItems([]);
+      setCheckedOut(true);
     } catch (error) {
       setErrorMessage("There has been an error submitting your order.");
       setIsLoading(false);
@@ -336,6 +339,7 @@ const SiteContextProvider = ({ children }) => {
         orderHistory,
         setIsLoading,
         setErrorMessage,
+        checkedOut
       }}
     >
       {children}

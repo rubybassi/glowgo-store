@@ -22,7 +22,7 @@ router.post("/checkout", authUser, async (req, res) => {
 router.get("/order/:id", authUser, async(req, res) => {
   try {
     const userID = req.params.id
-    const queriedOrder = await Order.find({ userID: userID });
+    const queriedOrder = await Order.find({ userID: userID }).sort({createdAt: -1});
     // sanitise user object to not send sensitive info card convert to string then string.slice(-4) and parse int
     res.status(200).json(queriedOrder);
   } catch (err) {
